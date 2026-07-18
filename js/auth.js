@@ -1,3 +1,7 @@
+// Принудительно проверяем что мы на правильном пути
+if (window.location.pathname.includes('login.html') && localStorage.getItem('dashboard-session')) {
+    window.location.replace('index.html');
+}
 const USERS_KEY = 'dashboard-users'
 
 // Получить текущего пользователя
