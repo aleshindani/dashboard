@@ -592,7 +592,7 @@
 							loginTime: new Date().toISOString(),
 						}),
 					)
-					window.location.href = 'index.html'
+					window.location.replace('index.html');
 				} else {
 					e.textContent = 'Неверный логин или пароль'
 					e.classList.add('show')
