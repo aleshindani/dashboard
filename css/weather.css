@@ -1,0 +1,81 @@
+/* ===== ВИДЖЕТ ПОГОДЫ ===== */
+.weather-widget {
+	background: var(--bg-card);
+	border-radius: var(--radius);
+	padding: 16px 20px;
+	border: 1px solid var(--border);
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	transition: var(--transition);
+}
+
+.weather-widget:hover {
+	border-color: var(--accent);
+	box-shadow: var(--shadow);
+}
+
+.weather-loading {
+	color: var(--text-secondary);
+	font-size: 0.85rem;
+}
+
+.weather-icon {
+	font-size: 2.5rem;
+	line-height: 1;
+}
+
+.weather-info {
+	flex: 1;
+}
+
+.weather-temp {
+	font-size: 2rem;
+	font-weight: 700;
+	color: var(--text-primary);
+	line-height: 1;
+}
+
+.weather-desc {
+	font-size: 0.8rem;
+	color: var(--text-secondary);
+	text-transform: capitalize;
+}
+
+.weather-city {
+	font-size: 0.75rem;
+	color: var(--accent-light);
+	margin-top: 2px;
+}
+
+.weather-details {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	font-size: 0.75rem;
+	color: var(--text-secondary);
+}
+
+.weather-detail {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.weather-error {
+	color: var(--danger);
+	font-size: 0.8rem;
+}
+
+/* Адаптив */
+@media (max-width: 600px) {
+	.weather-widget {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+	}
+
+	.weather-temp {
+		font-size: 1.5rem;
+	}
+}

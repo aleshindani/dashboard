@@ -1,0 +1,473 @@
+/* ===== ФИНАНСЫ ===== */
+.finance-page {
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+/* Баланс */
+.fin-balance {
+	background: linear-gradient(135deg, #6c63ff, #4f46e5);
+	border-radius: 16px;
+	padding: 28px 32px;
+	color: #fff;
+	margin-bottom: 24px;
+}
+
+.fin-balance-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 20px;
+}
+
+.fin-balance-title {
+	font-size: 0.85rem;
+	opacity: 0.85;
+	font-weight: 500;
+	letter-spacing: 0.5px;
+}
+
+.fin-balance-amount {
+	font-size: 3rem;
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: -1px;
+}
+
+.fin-balance-stats {
+	display: flex;
+	gap: 32px;
+}
+
+.fin-stat {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.fin-stat-label {
+	font-size: 0.75rem;
+	opacity: 0.7;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.fin-stat-value {
+	font-size: 1.2rem;
+	font-weight: 700;
+}
+
+.fin-stat-value.green {
+	color: #86efac;
+}
+.fin-stat-value.red {
+	color: #fca5a5;
+}
+
+/* Сетка */
+.fin-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+}
+
+/* Карточка */
+.fin-card {
+	background: var(--bg-card);
+	border-radius: 14px;
+	padding: 20px 24px;
+	border: 1px solid var(--border);
+}
+
+.fin-card-title {
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: var(--text-primary);
+	margin-bottom: 16px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+/* Поля ввода */
+.fin-group {
+	margin-bottom: 12px;
+}
+
+.fin-group:last-child {
+	margin-bottom: 0;
+}
+
+.fin-label {
+	display: block;
+	font-size: 0.75rem;
+	color: var(--text-secondary);
+	margin-bottom: 5px;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.fin-field {
+	width: 100%;
+	padding: 10px 14px;
+	border-radius: 10px;
+	border: 1.5px solid var(--border);
+	background: var(--bg-secondary);
+	color: var(--text-primary);
+	font-family: inherit;
+	font-size: 0.9rem;
+	transition: all 0.2s ease;
+	outline: none;
+}
+
+.fin-field:hover {
+	border-color: #6c63ff55;
+}
+
+.fin-field:focus {
+	border-color: #6c63ff;
+	box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+	background: var(--bg-primary);
+}
+
+.fin-field::placeholder {
+	color: #6b7280;
+}
+
+select.fin-field {
+	cursor: pointer;
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%239ba1b0' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 14px center;
+	padding-right: 36px;
+}
+
+.fin-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+}
+
+/* Кнопки */
+.fin-btn {
+	padding: 10px 20px;
+	border-radius: 10px;
+	border: none;
+	font-size: 0.85rem;
+	font-weight: 600;
+	cursor: pointer;
+	font-family: inherit;
+	transition: all 0.2s ease;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+}
+
+.fin-btn-primary {
+	background: #6c63ff;
+	color: white;
+	width: 100%;
+	padding: 12px;
+	font-size: 0.9rem;
+	margin-top: 4px;
+}
+
+.fin-btn-primary:hover {
+	background: #5b52e0;
+	box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+	transform: translateY(-1px);
+}
+
+.fin-btn-outline {
+	background: transparent;
+	border: 1.5px solid var(--border);
+	color: var(--text-primary);
+	width: 100%;
+	padding: 9px;
+	font-size: 0.8rem;
+}
+
+.fin-btn-outline:hover {
+	border-color: #6c63ff;
+	background: var(--bg-secondary);
+}
+
+/* Список операций */
+.fin-trans-list {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	max-height: 380px;
+	overflow-y: auto;
+}
+
+.fin-trans-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 14px;
+	border-radius: 10px;
+	background: var(--bg-secondary);
+	transition: all 0.2s ease;
+	border: 1px solid transparent;
+}
+
+.fin-trans-item:hover {
+	background: var(--bg-card);
+	border-color: var(--border);
+}
+
+.fin-trans-icon {
+	width: 36px;
+	height: 36px;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.2rem;
+	flex-shrink: 0;
+}
+
+.fin-trans-icon.income {
+	background: rgba(74, 222, 128, 0.15);
+}
+.fin-trans-icon.expense {
+	background: rgba(248, 113, 113, 0.15);
+}
+
+.fin-trans-info {
+	flex: 1;
+	min-width: 0;
+}
+
+.fin-trans-name {
+	font-weight: 500;
+	font-size: 0.85rem;
+	color: var(--text-primary);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.fin-trans-meta {
+	font-size: 0.7rem;
+	color: var(--text-secondary);
+	margin-top: 2px;
+}
+
+.fin-trans-amount {
+	font-weight: 700;
+	font-size: 0.9rem;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+.fin-trans-amount.income {
+	color: #4ade80;
+}
+.fin-trans-amount.expense {
+	color: #f87171;
+}
+
+.fin-trans-del {
+	width: 28px;
+	height: 28px;
+	border-radius: 6px;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	color: #6b7280;
+	font-size: 0.8rem;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: all 0.2s ease;
+}
+
+.fin-trans-item:hover .fin-trans-del {
+	opacity: 1;
+}
+
+.fin-trans-del:hover {
+	background: rgba(239, 68, 68, 0.15);
+	color: #ef4444;
+}
+
+/* Платежи */
+.fin-bills-list {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.fin-bill {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 14px;
+	border-radius: 10px;
+	background: var(--bg-secondary);
+	transition: all 0.2s ease;
+	border: 1px solid transparent;
+}
+
+.fin-bill:hover {
+	border-color: var(--border);
+}
+
+.fin-bill.urgent {
+	border-left: 3px solid #ef4444;
+	background: rgba(239, 68, 68, 0.04);
+}
+
+.fin-bill.paid-bill {
+	opacity: 0.5;
+}
+
+.fin-bill.paid-bill .fin-bill-name {
+	text-decoration: line-through;
+}
+
+.fin-bill-icon {
+	font-size: 1.4rem;
+	width: 32px;
+	text-align: center;
+	flex-shrink: 0;
+}
+
+.fin-bill-info {
+	flex: 1;
+	min-width: 0;
+}
+
+.fin-bill-name {
+	font-weight: 500;
+	font-size: 0.85rem;
+	color: var(--text-primary);
+}
+
+.fin-bill-meta {
+	font-size: 0.7rem;
+	color: var(--text-secondary);
+	margin-top: 2px;
+}
+
+.fin-bill-status-text {
+	font-size: 0.7rem;
+	font-weight: 600;
+	padding: 3px 8px;
+	border-radius: 4px;
+	white-space: nowrap;
+	color: var(--text-secondary);
+}
+
+.fin-bill-status-text.urgent {
+	color: #ef4444;
+	background: rgba(239, 68, 68, 0.1);
+}
+
+.fin-bill-amount {
+	font-weight: 700;
+	color: #f87171;
+	font-size: 0.85rem;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+.fin-bill-status-btn {
+	padding: 5px 12px;
+	border-radius: 6px;
+	font-size: 0.7rem;
+	font-weight: 600;
+	cursor: pointer;
+	border: none;
+	font-family: inherit;
+	transition: all 0.2s ease;
+	white-space: nowrap;
+	background: rgba(108, 99, 255, 0.15);
+	color: #8b85ff;
+}
+
+.fin-bill-status-btn:hover {
+	background: #6c63ff;
+	color: white;
+}
+
+.fin-bill-status-btn.paid {
+	background: rgba(74, 222, 128, 0.2);
+	color: #4ade80;
+	cursor: default;
+}
+
+.fin-bill-del {
+	width: 28px;
+	height: 28px;
+	border-radius: 6px;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	color: #6b7280;
+	font-size: 0.8rem;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: all 0.2s ease;
+}
+
+.fin-bill:hover .fin-bill-del {
+	opacity: 1;
+}
+
+.fin-bill-del:hover {
+	background: rgba(239, 68, 68, 0.15);
+	color: #ef4444;
+}
+
+/* Пусто */
+.fin-empty {
+	text-align: center;
+	padding: 32px 20px;
+	color: var(--text-secondary);
+	font-size: 0.85rem;
+}
+
+.fin-empty-icon {
+	font-size: 2rem;
+	margin-bottom: 8px;
+	opacity: 0.5;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+	.fin-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.fin-balance-amount {
+		font-size: 2.2rem;
+	}
+
+	.fin-balance-stats {
+		gap: 16px;
+	}
+
+	.fin-row {
+		grid-template-columns: 1fr;
+	}
+
+	.fin-card {
+		padding: 16px;
+	}
+
+	.fin-bill {
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+}

@@ -1,0 +1,1743 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Личный дашборд</title>
+
+		<link rel="icon" type="image/png" href="favicon.png" />
+		<link rel="apple-touch-icon" href="favicon.png" />
+		<link rel="manifest" href="manifest.json" />
+		<meta name="theme-color" content="#6c63ff" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta
+			name="apple-mobile-web-app-status-bar-style"
+			content="black-translucent"
+		/>
+
+		<link rel="stylesheet" href="css/themes.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="css/calendar.css" />
+		<link rel="stylesheet" href="css/tasks.css" />
+		<link rel="stylesheet" href="css/salary.css" />
+		<link rel="stylesheet" href="css/weather.css" />
+		<link rel="stylesheet" href="css/finance.css" />
+		<link rel="stylesheet" href="css/analytics.css" />
+		<link rel="stylesheet" href="css/fun.css" />
+		<link rel="stylesheet" href="css/health.css" />
+		<link rel="stylesheet" href="css/goals.css" />
+		<link rel="stylesheet" href="css/photo.css" />
+		<link rel="stylesheet" href="css/messages.css" />
+		<link rel="stylesheet" href="css/moderation.css" />
+		<link rel="stylesheet" href="css/responsive.css" />
+	</head>
+	<body>
+		<div class="dashboard">
+			<div
+				class="sidebar-overlay"
+				id="sidebarOverlay"
+				onclick="document.getElementById('sidebar').classList.remove('open')"
+			></div>
+
+			<!-- Сайдбар -->
+			<aside class="sidebar" id="sidebar">
+				<div class="sidebar-logo">
+					<div class="logo-icon">⚡</div>
+					<div class="logo-text">My<span>Dash</span></div>
+				</div>
+				<nav class="nav-section">
+					<div class="nav-label">Главное</div>
+					<a class="nav-item active" data-page="overview"
+						><span class="icon">📊</span>Обзор</a
+					>
+					<a class="nav-item" data-page="analytics"
+						><span class="icon">📈</span>Аналитика</a
+					>
+				</nav>
+				<nav class="nav-section">
+					<div class="nav-label">Инструменты</div>
+					<a class="nav-item" data-page="calendar"
+						><span class="icon">📅</span>Календарь</a
+					>
+					<a class="nav-item" data-page="tasks"
+						><span class="icon">✅</span>Задачи<span
+							class="badge"
+							id="tasksBadge"
+							>0</span
+						></a
+					>
+					<a class="nav-item" data-page="salary"
+						><span class="icon">💵</span>Зарплата</a
+					>
+					<a class="nav-item" data-page="finance"
+						><span class="icon">💰</span>Финансы</a
+					>
+					<a class="nav-item" data-page="health"
+						><span class="icon">🩸</span>Здоровье</a
+					>
+				</nav>
+				<nav class="nav-section">
+					<div class="nav-label">Развлечения</div>
+					<a class="nav-item" data-page="places"
+						><span class="icon">📍</span>Места</a
+					>
+					<a class="nav-item" data-page="food"
+						><span class="icon">🍽️</span>Еда</a
+					>
+					<a class="nav-item" data-page="watch"
+						><span class="icon">🎬</span>Посмотреть</a
+					>
+					<a class="nav-item" data-page="shopping"
+						><span class="icon">🛍️</span>Покупки</a
+					>
+					<a class="nav-item" data-page="links"
+						><span class="icon">🔗</span>Ссылки</a
+					>
+					<a class="nav-item" data-page="photodiary"
+						><span class="icon">📸</span>Фото</a
+					>
+				</nav>
+				<nav class="nav-section">
+					<div class="nav-label">Другое</div>
+					<a class="nav-item" data-page="goals"
+						><span class="icon">🎯</span>Цели</a
+					>
+				</nav>
+				<nav class="nav-section" style="margin-top: auto">
+					<a class="nav-item" data-page="moderation" style="display: none"
+						><span class="icon">🛡️</span>Модерация</a
+					>
+					<a class="nav-item" data-page="settings"
+						><span class="icon">⚙️</span>Настройки</a
+					>
+					<a class="nav-item" data-page="logout"
+						><span class="icon">🚪</span>Выход</a
+					>
+				</nav>
+			</aside>
+
+			<main class="main-content" id="mainContent">
+				<!-- ===== ОБЗОР ===== -->
+				<div class="page active" id="page-overview">
+					<div class="top-bar">
+						<h1 class="page-title">Обзор</h1>
+						<div class="top-actions">
+							<button
+								class="menu-toggle"
+								onclick="
+									document.getElementById('sidebar').classList.toggle('open')
+								"
+							>
+								☰
+							</button>
+							<button class="theme-toggle" id="themeToggle">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="overview-top-row">
+						<div class="weather-widget" id="weatherWidget">
+							<div class="weather-loading">Загрузка...</div>
+						</div>
+						<div class="today-card" id="todayWidget">
+							<div class="today-date-section">
+								<div class="today-day-number" id="todayDayNumber">--</div>
+								<div class="today-month-year">
+									<span id="todayMonth">----</span
+									><span id="todayYear">----</span>
+								</div>
+							</div>
+							<div class="today-divider"></div>
+							<div class="today-info-section">
+								<div class="today-day-name" id="todayDayName">----</div>
+								<div class="today-status" id="todayStatus">
+									<span class="status-dot"></span
+									><span class="status-text">Нет отметки</span>
+								</div>
+								<div class="today-time" id="todayTime">--:--</div>
+							</div>
+						</div>
+						<div class="quote-card" id="quoteCard">
+							<div class="quote-text" id="quoteText">Загрузка...</div>
+							<div class="quote-author" id="quoteAuthor"></div>
+						</div>
+					</div>
+					<div class="overview-middle-row">
+						<div class="card" id="calendarSummary">
+							<div class="card-title-row">
+								<span class="chart-title">📅 Сводка за месяц</span
+								><span class="card-date-label" id="summaryMonthLabel"></span>
+							</div>
+							<div class="summary-stats" id="summaryStats"></div>
+						</div>
+						<div class="card" id="upcomingEvents">
+							<div class="card-title-row">
+								<span class="chart-title">📅 Ближайшие события</span>
+							</div>
+							<div id="upcomingEventsList">
+								<p class="empty-text">Нет событий</p>
+							</div>
+						</div>
+					</div>
+					<div class="overview-bottom-row">
+						<div class="card" id="upcomingTasks">
+							<div class="card-title-row">
+								<span class="chart-title">✅ Задачи на сегодня</span
+								><a
+									class="nav-item"
+									data-page="tasks"
+									style="
+										font-size: 0.75rem;
+										padding: 4px 10px;
+										display: inline;
+										cursor: pointer;
+									"
+									>Все →</a
+								>
+							</div>
+							<div id="todayTasksList"><p class="empty-text">Нет задач</p></div>
+						</div>
+						<div class="card" id="billsWidgetCard">
+							<div class="card-title-row">
+								<span class="chart-title">📅 Платежи</span
+								><a
+									class="nav-item"
+									data-page="finance"
+									style="
+										font-size: 0.75rem;
+										padding: 4px 10px;
+										display: inline;
+										cursor: pointer;
+									"
+									>Все →</a
+								>
+							</div>
+							<div id="billsWidget">
+								<p class="empty-text">Нет срочных платежей ✅</p>
+							</div>
+						</div>
+						<div class="card" id="quickNote">
+							<div class="card-title-row">
+								<span class="chart-title">📝 Заметка</span>
+							</div>
+							<textarea
+								id="quickNoteInput"
+								class="quick-note-input"
+								placeholder="Запишите мысль..."
+							></textarea>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== АНАЛИТИКА ===== -->
+				<div class="page" id="page-analytics">
+					<div class="top-bar">
+						<h1 class="page-title">Аналитика</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeToggleAnalytics">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="analytics-grid">
+						<div class="analytics-card">
+							<div class="analytics-card-title">💰 Доходы и расходы</div>
+							<div class="analytics-chart" id="financeChart">
+								<div class="chart-bars-horizontal" id="financeBars"></div>
+							</div>
+						</div>
+						<div class="analytics-card">
+							<div class="analytics-card-title">📅 Статистика месяца</div>
+							<div class="analytics-chart" id="calendarChart">
+								<div class="chart-donut" id="calendarDonut"></div>
+							</div>
+						</div>
+						<div class="analytics-card">
+							<div class="analytics-card-title">✅ Прогресс задач</div>
+							<div class="analytics-chart" id="tasksChart">
+								<div class="chart-progress" id="tasksProgress"></div>
+							</div>
+						</div>
+						<div class="analytics-card">
+							<div class="analytics-card-title">💵 Зарплата</div>
+							<div class="analytics-chart" id="salaryChart">
+								<div class="chart-big-number" id="salaryAvg"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== КАЛЕНДАРЬ ===== -->
+				<div class="page" id="page-calendar">
+					<div class="top-bar">
+						<h1 class="page-title">Календарь</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeToggleCalendar">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="calendar-layout">
+						<div class="calendar-panel">
+							<div class="calendar-header">
+								<button class="calendar-nav" id="prevMonth">◀</button>
+								<h2 class="calendar-month-year" id="currentMonthYear">
+									Июль 2026
+								</h2>
+								<button class="calendar-nav" id="nextMonth">▶</button
+								><button class="calendar-today-btn" id="todayBtn">
+									Сегодня
+								</button>
+							</div>
+							<div class="calendar-weekdays">
+								<span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span
+								><span>Пт</span><span>Сб</span><span>Вс</span>
+							</div>
+							<div class="calendar-grid" id="calendarGrid"></div>
+							<div class="calendar-legend">
+								<div class="legend-item">
+									<span class="legend-icon">💼</span
+									><span class="legend-dot work"></span>Работа
+								</div>
+								<div class="legend-item">
+									<span class="legend-icon">📚</span
+									><span class="legend-dot study"></span>Учёба
+								</div>
+								<div class="legend-item">
+									<span class="legend-icon">📝</span
+									><span class="legend-dot exam"></span>Экзамен
+								</div>
+								<div class="legend-item">
+									<span class="legend-icon">🎓</span
+									><span class="legend-dot session"></span>Сессия
+								</div>
+								<div class="legend-item">
+									<span class="legend-icon">🏆</span
+									><span class="legend-dot diploma"></span>Диплом
+								</div>
+								<div class="legend-item">
+									<span class="legend-icon">🏖️</span
+									><span class="legend-dot dayoff"></span>Выходной
+								</div>
+								<div class="legend-item">
+									<span class="legend-icon">📋</span
+									><span class="legend-dot tasks"></span>Задачи
+								</div>
+							</div>
+						</div>
+						<div class="calendar-sidebar">
+							<div class="card">
+								<h3 class="stats-title">📊 Статистика</h3>
+								<div class="stats-grid" id="monthStats">
+									<div class="stat-item">
+										<span class="stat-icon">💼</span
+										><span class="stat-value" id="statWork">0</span
+										><span class="stat-label">Рабочих</span>
+									</div>
+									<div class="stat-item">
+										<span class="stat-icon">📚</span
+										><span class="stat-value" id="statStudy">0</span
+										><span class="stat-label">Учёбы</span>
+									</div>
+									<div class="stat-item">
+										<span class="stat-icon">📝</span
+										><span class="stat-value" id="statExam">0</span
+										><span class="stat-label">Экзаменов</span>
+									</div>
+									<div class="stat-item">
+										<span class="stat-icon">🎓</span
+										><span class="stat-value" id="statSession">0</span
+										><span class="stat-label">Сессий</span>
+									</div>
+									<div class="stat-item">
+										<span class="stat-icon">🏆</span
+										><span class="stat-value" id="statDiploma">0</span
+										><span class="stat-label">Диплом</span>
+									</div>
+									<div class="stat-item">
+										<span class="stat-icon">🏖️</span
+										><span class="stat-value" id="statDayoff">0</span
+										><span class="stat-label">Выходных</span>
+									</div>
+								</div>
+							</div>
+							<div class="card" id="selectedDayInfo">
+								<h3 class="stats-title">📋 Выбранный день</h3>
+								<p class="info-placeholder">Нажмите на день</p>
+							</div>
+							<div class="card">
+								<h3 class="stats-title">⚡ Действие</h3>
+								<div class="quick-actions">
+									<button class="quick-action-btn" data-type="work">
+										💼 Работа</button
+									><button class="quick-action-btn" data-type="study">
+										📚 Учёба</button
+									><button class="quick-action-btn" data-type="exam">
+										📝 Экзамен</button
+									><button class="quick-action-btn" data-type="session">
+										🎓 Сессия</button
+									><button class="quick-action-btn" data-type="diploma">
+										🏆 Диплом</button
+									><button class="quick-action-btn" data-type="dayoff">
+										🏖️ Выходной</button
+									><button class="quick-action-btn clear-btn" data-type="none">
+										✕ Очистить
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== ЗАДАЧИ ===== -->
+				<div class="page" id="page-tasks">
+					<div class="top-bar">
+						<h1 class="page-title">Задачи</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeToggleTasks">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="tasks-layout">
+						<div class="tasks-sidebar">
+							<button class="add-task-btn" id="addTaskBtn">
+								+ Новая задача
+							</button>
+							<div class="tasks-filter">
+								<h3 class="filter-title">📋 Фильтры</h3>
+								<button class="filter-btn active" data-filter="all">Все</button
+								><button class="filter-btn" data-filter="today">
+									На сегодня</button
+								><button class="filter-btn" data-filter="week">На неделе</button
+								><button class="filter-btn" data-filter="overdue">
+									Просроченные
+								</button>
+							</div>
+							<div class="tasks-filter">
+								<h3 class="filter-title">⭐ Приоритет</h3>
+								<button class="filter-btn" data-filter="high">Высокий</button
+								><button class="filter-btn" data-filter="medium">Средний</button
+								><button class="filter-btn" data-filter="low">Низкий</button>
+							</div>
+							<div class="tasks-filter">
+								<h3 class="filter-title">📅 По дате</h3>
+								<input type="date" class="date-filter" id="dateFilter" />
+							</div>
+						</div>
+						<div class="tasks-list" id="tasksList">
+							<p class="tasks-empty">Нет задач</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== ЗАРПЛАТА ===== -->
+				<div class="page" id="page-salary">
+					<div class="top-bar">
+						<h1 class="page-title">Зарплата</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeToggleSalary">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="salary-layout">
+						<div class="salary-left">
+							<div class="salary-month-selector">
+								<button class="calendar-nav" id="salaryPrevMonth">◀</button>
+								<h2 class="calendar-month-year" id="salaryMonthYear">
+									Июль 2026
+								</h2>
+								<button class="calendar-nav" id="salaryNextMonth">▶</button
+								><button class="calendar-today-btn" id="salaryTodayBtn">
+									Сегодня
+								</button>
+							</div>
+							<div class="issues-panel" id="issuesInputPanel"></div>
+							<div class="salary-summary">
+								<div class="salary-summary-grid">
+									<div class="salary-summary-item">
+										<div class="salary-summary-label">💼 Дней</div>
+										<div class="salary-summary-value" id="salaryWorkDays">
+											0
+										</div>
+									</div>
+									<div class="salary-summary-item">
+										<div class="salary-summary-label">📦 Выдач</div>
+										<div class="salary-summary-value" id="salaryTotalIssues">
+											0
+										</div>
+									</div>
+									<div class="salary-summary-item">
+										<div class="salary-summary-label">🎁 Бонус</div>
+										<div class="salary-summary-value accent" id="salaryIssues">
+											0 ₽
+										</div>
+									</div>
+								</div>
+								<div class="salary-total">
+									<span class="salary-total-label">💰 Итого</span
+									><span class="salary-total-value" id="salaryGrandTotal"
+										>0 ₽</span
+									>
+								</div>
+							</div>
+							<div class="salary-hint">
+								💡 Ставка: 2 500 ₽/день + (выдачи − 100) × 3₽
+							</div>
+						</div>
+						<div class="salary-right">
+							<div class="salary-days-header">📋 Рабочие дни</div>
+							<div class="salary-days-list" id="salaryDaysList"></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== ФИНАНСЫ ===== -->
+				<div class="page" id="page-finance">
+					<div class="top-bar">
+						<h1 class="page-title">Финансы</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeToggleFinance">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="finance-page">
+						<div class="fin-balance">
+							<div class="fin-balance-header">
+								<div class="fin-balance-title">Текущий баланс</div>
+								<div class="fin-balance-amount" id="currentBalance">0 ₽</div>
+							</div>
+							<div class="fin-balance-stats">
+								<div class="fin-stat">
+									<span class="fin-stat-label">Доходы</span
+									><span class="fin-stat-value green" id="totalIncome"
+										>0 ₽</span
+									>
+								</div>
+								<div class="fin-stat">
+									<span class="fin-stat-label">Расходы</span
+									><span class="fin-stat-value red" id="totalExpense">0 ₽</span>
+								</div>
+							</div>
+						</div>
+						<div class="fin-grid">
+							<div class="fin-card">
+								<div class="fin-card-title">➕ Новая операция</div>
+								<div class="fin-group">
+									<label class="fin-label">Описание</label
+									><input
+										type="text"
+										class="fin-field"
+										id="finTitle"
+										placeholder="Например: Продукты"
+									/>
+								</div>
+								<div class="fin-row">
+									<div class="fin-group">
+										<label class="fin-label">Сумма</label
+										><input
+											type="number"
+											class="fin-field"
+											id="finAmount"
+											placeholder="0"
+										/>
+									</div>
+									<div class="fin-group">
+										<label class="fin-label">Тип</label
+										><select class="fin-field" id="finType">
+											<option value="expense">Расход</option>
+											<option value="income">Доход</option>
+										</select>
+									</div>
+								</div>
+								<div class="fin-row">
+									<div class="fin-group">
+										<label class="fin-label">Дата</label
+										><input type="date" class="fin-field" id="finDate" />
+									</div>
+									<div class="fin-group">
+										<label class="fin-label">Категория</label
+										><select class="fin-field" id="finCategory">
+											<option value="other">Другое</option>
+											<option value="salary">Зарплата</option>
+											<option value="food">Еда</option>
+											<option value="transport">Транспорт</option>
+											<option value="utilities">Коммуналка</option>
+											<option value="entertainment">Развлечения</option>
+											<option value="health">Здоровье</option>
+											<option value="education">Образование</option>
+										</select>
+									</div>
+								</div>
+								<button class="fin-btn fin-btn-primary" id="addTransBtn">
+									Добавить операцию
+								</button>
+							</div>
+							<div class="fin-card">
+								<div class="fin-card-title">📅 Новый платёж</div>
+								<div class="fin-group">
+									<label class="fin-label">Категория</label
+									><select class="fin-field" id="billCategory">
+										<option value="internet">🌐 Интернет</option>
+										<option value="mobile">📱 Мобильная связь</option>
+										<option value="rent">🏠 Квартплата</option>
+										<option value="electricity">⚡ Электричество</option>
+										<option value="water">💧 Вода</option>
+										<option value="heating">🔥 Отопление</option>
+										<option value="credit">🏦 Кредит</option>
+										<option value="insurance">🛡️ Страховка</option>
+										<option value="subscription">🔄 Подписка</option>
+										<option value="taxes">📄 Налоги</option>
+										<option value="other">📌 Другое</option>
+										<option value="custom">✏️ Своё название</option>
+									</select>
+								</div>
+								<div
+									class="fin-group"
+									id="billCustomName"
+									style="display: none"
+								>
+									<label class="fin-label">Название</label
+									><input
+										type="text"
+										class="fin-field"
+										id="billCustomName"
+										placeholder="Введите название"
+									/>
+								</div>
+								<div class="fin-row">
+									<div class="fin-group">
+										<label class="fin-label">Сумма</label
+										><input
+											type="number"
+											class="fin-field"
+											id="billAmount"
+											placeholder="0"
+										/>
+									</div>
+									<div class="fin-group">
+										<label class="fin-label">Дата оплаты</label
+										><input type="date" class="fin-field" id="billDate" />
+									</div>
+								</div>
+								<div class="fin-group">
+									<label class="fin-label">Приоритет</label
+									><select class="fin-field" id="billPriority">
+										<option value="high">🔴 Высокий</option>
+										<option value="medium" selected>🟡 Средний</option>
+										<option value="low">🟢 Низкий</option>
+									</select>
+								</div>
+								<button class="fin-btn fin-btn-primary" id="addBillBtn">
+									Добавить платёж
+								</button>
+							</div>
+							<div class="fin-card">
+								<div class="fin-card-title">📋 Операции</div>
+								<div class="fin-trans-list" id="financeList">
+									<div class="fin-empty">
+										<div class="fin-empty-icon">📋</div>
+										Нет операций
+									</div>
+								</div>
+							</div>
+							<div class="fin-card">
+								<div class="fin-card-title">📅 Платежи</div>
+								<div class="fin-bills-list" id="billsList">
+									<div class="fin-empty">
+										<div class="fin-empty-icon">📅</div>
+										Нет платежей
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== МЕСТА ===== -->
+				<div class="page" id="page-places">
+					<div class="top-bar">
+						<h1 class="page-title">Места</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeTogglePlaces">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="fun-layout">
+						<div class="fun-sidebar">
+							<button class="fun-add-btn" id="addPlaceBtn">
+								+ Добавить место
+							</button>
+							<input
+								type="text"
+								class="fun-search"
+								id="placeSearch"
+								placeholder="🔍 Поиск..."
+							/>
+							<div class="fun-filter-card">
+								<h3 class="fun-filter-title">🔍 Фильтр</h3>
+								<button class="fun-filter-btn active" data-filter="all">
+									Все</button
+								><button class="fun-filter-btn" data-filter="want">
+									Хочу посетить</button
+								><button class="fun-filter-btn" data-filter="visited">
+									Уже был
+								</button>
+							</div>
+							<div class="fun-filter-card">
+								<h3 class="fun-filter-title">🏷️ Категория</h3>
+								<button class="fun-filter-btn" data-filter="cafe">
+									☕ Кафе</button
+								><button class="fun-filter-btn" data-filter="restaurant">
+									🍽️ Ресторан</button
+								><button class="fun-filter-btn" data-filter="park">
+									🌳 Парк</button
+								><button class="fun-filter-btn" data-filter="museum">
+									🏛️ Музей</button
+								><button class="fun-filter-btn" data-filter="entertainment">
+									🎮 Развлечения</button
+								><button class="fun-filter-btn" data-filter="other">
+									📌 Другое
+								</button>
+							</div>
+						</div>
+						<div class="fun-list" id="placesList">
+							<p class="fun-empty">Нет сохранённых мест</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== ЕДА ===== -->
+				<div class="page" id="page-food">
+					<div class="top-bar">
+						<h1 class="page-title">Еда</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeToggleFood">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="fun-layout">
+						<div class="fun-sidebar">
+							<button class="fun-add-btn" id="addFoodBtn">
+								+ Добавить рецепт</button
+							><input
+								type="text"
+								class="fun-search"
+								id="foodSearch"
+								placeholder="🔍 Поиск..."
+							/>
+							<div class="fun-filter-card">
+								<h3 class="fun-filter-title">🔍 Фильтр</h3>
+								<button class="fun-filter-btn active" data-filter="all">
+									Все</button
+								><button class="fun-filter-btn" data-filter="tasty">
+									👍 Вкусно</button
+								><button class="fun-filter-btn" data-filter="nottasty">
+									👎 Не вкусно
+								</button>
+							</div>
+							<div class="fun-filter-card">
+								<h3 class="fun-filter-title">🍽️ Тип</h3>
+								<button class="fun-filter-btn" data-filter="pp">🥗 ПП</button
+								><button class="fun-filter-btn" data-filter="junk">
+									🍔 Джанк-фуд</button
+								><button class="fun-filter-btn" data-filter="drink">
+									🥤 Напитки</button
+								><button class="fun-filter-btn" data-filter="main">
+									🍝 Основное</button
+								><button class="fun-filter-btn" data-filter="dessert">
+									🍰 Десерт</button
+								><button class="fun-filter-btn" data-filter="other">
+									📌 Другое
+								</button>
+							</div>
+						</div>
+						<div class="fun-list" id="foodList">
+							<p class="fun-empty">Нет рецептов</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== ПОСМОТРЕТЬ ===== -->
+				<div class="page" id="page-watch">
+					<div class="top-bar">
+						<h1 class="page-title">Посмотреть</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeToggleWatch">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="fun-layout">
+						<div class="fun-sidebar">
+							<button class="fun-add-btn" id="addWatchBtn">+ Добавить</button
+							><input
+								type="text"
+								class="fun-search"
+								id="watchSearch"
+								placeholder="🔍 Поиск..."
+							/>
+							<div class="fun-filter-card">
+								<h3 class="fun-filter-title">🔍 Фильтр</h3>
+								<button class="fun-filter-btn active" data-filter="all">
+									Все</button
+								><button class="fun-filter-btn" data-filter="want">
+									Хочу посмотреть</button
+								><button class="fun-filter-btn" data-filter="watched">
+									Просмотрено
+								</button>
+							</div>
+							<div class="fun-filter-card">
+								<h3 class="fun-filter-title">🎬 Тип</h3>
+								<button class="fun-filter-btn" data-filter="movie">
+									🎥 Фильм</button
+								><button class="fun-filter-btn" data-filter="series">
+									📺 Сериал</button
+								><button class="fun-filter-btn" data-filter="anime">
+									🗾 Аниме</button
+								><button class="fun-filter-btn" data-filter="cartoon">
+									🐱 Мультфильм</button
+								><button class="fun-filter-btn" data-filter="video">
+									📹 Видео
+								</button>
+							</div>
+						</div>
+						<div class="fun-list" id="watchList">
+							<p class="fun-empty">Нет сохранённого</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== ПОКУПКИ ===== -->
+				<div class="page" id="page-shopping">
+					<div class="top-bar">
+						<h1 class="page-title">Покупки</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeToggleShopping">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="fun-layout">
+						<div class="fun-sidebar">
+							<button class="fun-add-btn" id="addShopBtn">
+								+ Добавить товар</button
+							><input
+								type="text"
+								class="fun-search"
+								id="shopSearch"
+								placeholder="🔍 Поиск..."
+							/>
+							<div class="fun-filter-card">
+								<h3 class="fun-filter-title">🔍 Статус</h3>
+								<button class="fun-filter-btn active" data-filter="all">
+									Все</button
+								><button class="fun-filter-btn" data-filter="want">
+									Хочу купить</button
+								><button class="fun-filter-btn" data-filter="bought">
+									Куплено
+								</button>
+							</div>
+							<div class="fun-filter-card">
+								<h3 class="fun-filter-title">🎯 Назначение</h3>
+								<button class="fun-filter-btn" data-filter="gift">
+									🎁 Подарок</button
+								><button class="fun-filter-btn" data-filter="self">
+									👤 Себе
+								</button>
+							</div>
+							<div class="fun-filter-card">
+								<h3 class="fun-filter-title">🏷️ Категория</h3>
+								<button class="fun-filter-btn" data-filter="electronics">
+									📱 Электроника</button
+								><button class="fun-filter-btn" data-filter="clothes">
+									👕 Одежда</button
+								><button class="fun-filter-btn" data-filter="home">
+									🏠 Дом</button
+								><button class="fun-filter-btn" data-filter="beauty">
+									💄 Красота</button
+								><button class="fun-filter-btn" data-filter="sport">
+									⚽ Спорт</button
+								><button class="fun-filter-btn" data-filter="books">
+									📚 Книги</button
+								><button class="fun-filter-btn" data-filter="other">
+									📌 Другое
+								</button>
+							</div>
+						</div>
+						<div class="fun-list" id="shopList">
+							<p class="fun-empty">Нет сохранённых товаров</p>
+						</div>
+					</div>
+				</div>
+				<!-- ===== ЗДОРОВЬЕ ===== -->
+				<div class="page" id="page-health">
+					<div class="top-bar">
+						<h1 class="page-title">Здоровье</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeToggleHealth">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+
+					<div class="health-layout">
+						<!-- Левая колонка -->
+						<div class="health-left">
+							<!-- Быстрый ввод -->
+							<div class="card" style="margin-bottom: 16px">
+								<div class="card-subtitle">🩸 Быстрая запись</div>
+								<div class="health-form">
+									<div class="fin-row">
+										<div class="fin-group">
+											<label class="fin-label">Сахар (ммоль/л)</label
+											><input
+												type="number"
+												step="0.1"
+												class="fin-field"
+												id="sugarLevel"
+												placeholder="5.5"
+											/>
+										</div>
+										<div class="fin-group">
+											<label class="fin-label">Время</label
+											><input type="time" class="fin-field" id="sugarTime" />
+										</div>
+									</div>
+									<div class="fin-row">
+										<div class="fin-group">
+											<label class="fin-label">Инсулин (ед.)</label
+											><input
+												type="number"
+												step="0.5"
+												class="fin-field"
+												id="insulinDose"
+												placeholder="0"
+											/>
+										</div>
+										<div class="fin-group">
+											<label class="fin-label">ХЕ</label
+											><input
+												type="number"
+												step="0.5"
+												class="fin-field"
+												id="breadUnits"
+												placeholder="0"
+											/>
+										</div>
+									</div>
+									<div class="fin-group">
+										<label class="fin-label">Тип инсулина</label
+										><select class="fin-field" id="insulinType">
+											<option value="bolus">💉 Болюсный (на еду)</option>
+											<option value="basal">⏳ Базальный (длинный)</option>
+											<option value="correction">🔧 Коррекция</option>
+										</select>
+									</div>
+									<div class="fin-group">
+										<label class="fin-label">Заметка</label
+										><input
+											type="text"
+											class="fin-field"
+											id="sugarNote"
+											placeholder="Что ел, самочувствие..."
+										/>
+									</div>
+									<button class="fin-btn fin-btn-primary" id="addHealthBtn">
+										💾 Записать
+									</button>
+								</div>
+							</div>
+
+							<!-- Статистика -->
+							<div class="card">
+								<div class="card-subtitle">📊 Статистика за сегодня</div>
+								<div class="health-stats" id="healthStats">
+									<div class="health-stat-item">
+										<span class="health-stat-value" id="avgSugar">--</span
+										><span class="health-stat-label">Средний сахар</span>
+									</div>
+									<div class="health-stat-item">
+										<span class="health-stat-value" id="totalInsulin">0</span
+										><span class="health-stat-label">Инсулин всего</span>
+									</div>
+									<div class="health-stat-item">
+										<span class="health-stat-value" id="totalBread">0</span
+										><span class="health-stat-label">ХЕ всего</span>
+									</div>
+									<div class="health-stat-item">
+										<span class="health-stat-value" id="sugarCount">0</span
+										><span class="health-stat-label">Замеров</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Правая колонка -->
+						<div class="health-right">
+							<!-- Мини-график -->
+							<div class="card" style="margin-bottom: 16px">
+								<div class="card-subtitle">📈 Сахар за сегодня</div>
+								<div id="sugarChart" class="sugar-chart">
+									<p class="empty-text">Нет данных</p>
+								</div>
+							</div>
+
+							<!-- История -->
+							<div class="card">
+								<div class="card-subtitle">📋 История записей</div>
+								<div id="healthHistory" class="health-history">
+									<p class="empty-text">Нет записей за сегодня</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ===== ЦЕЛИ ===== -->
+				<div class="page" id="page-goals">
+					<div class="top-bar">
+						<h1 class="page-title">Цели</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeToggleGoals">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+
+					<div class="goals-layout">
+						<!-- Левая колонка: XP и уровень -->
+						<div class="goals-left">
+							<div class="xp-card">
+								<div class="xp-level" id="xpLevel">Уровень 1</div>
+								<div class="xp-title">⚡ Опыт</div>
+								<div class="xp-bar-wrap">
+									<div class="xp-bar" id="xpBar" style="width: 0%"></div>
+								</div>
+								<div class="xp-text" id="xpText">0 / 100 XP</div>
+							</div>
+
+							<div class="card" style="margin-top: 16px">
+								<div class="card-subtitle">🏆 Достижения</div>
+								<div id="achievementsList">
+									<p class="empty-text">
+										Выполняйте задачи чтобы получать достижения!
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- Правая колонка: цели -->
+						<div class="goals-right">
+							<div style="display: flex; gap: 10px; margin-bottom: 16px">
+								<button class="fun-add-btn" id="addGoalBtn" style="flex: 1">
+									+ Новая цель
+								</button>
+								<button
+									class="fun-add-btn"
+									id="addSubgoalBtn"
+									style="
+										flex: 1;
+										background: var(--bg-secondary);
+										color: var(--text-primary);
+										border: 1px solid var(--border);
+									"
+								>
+									+ Подзадача
+								</button>
+							</div>
+
+							<div class="goals-list" id="goalsList">
+								<p class="empty-text">Нет целей. Создайте первую цель!</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ===== ССЫЛКИ ===== -->
+				<div class="page" id="page-links">
+					<div class="top-bar">
+						<h1 class="page-title">Ссылки</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeToggleLinks">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="fun-layout">
+						<div class="fun-sidebar">
+							<button class="fun-add-btn" id="addLinkBtn">
+								+ Добавить ссылку
+							</button>
+							<input
+								type="text"
+								class="fun-search"
+								id="linkSearch"
+								placeholder="🔍 Поиск..."
+							/>
+							<div class="fun-filter-card">
+								<h3 class="fun-filter-title">📂 Категория</h3>
+								<button class="fun-filter-btn active" data-filter="all">
+									Все</button
+								><button class="fun-filter-btn" data-filter="tools">
+									🛠️ Инструменты</button
+								><button class="fun-filter-btn" data-filter="articles">
+									📄 Статьи</button
+								><button class="fun-filter-btn" data-filter="video">
+									🎥 Видео</button
+								><button class="fun-filter-btn" data-filter="dev">
+									💻 Разработка</button
+								><button class="fun-filter-btn" data-filter="design">
+									🎨 Дизайн</button
+								><button class="fun-filter-btn" data-filter="social">
+									📱 Соцсети</button
+								><button class="fun-filter-btn" data-filter="other">
+									📌 Другое
+								</button>
+							</div>
+						</div>
+						<div class="fun-list" id="linksList">
+							<p class="fun-empty">Нет сохранённых ссылок</p>
+						</div>
+					</div>
+				</div>
+				<!-- ===== ФОТО-ДНЕВНИК ===== -->
+				<div class="page" id="page-photodiary">
+					<div class="top-bar">
+						<h1 class="page-title">Фото-дневник</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeTogglePhoto">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="photo-layout">
+						<div class="photo-upload-card">
+							<div class="card-subtitle">📸 Добавить фото дня</div>
+							<div class="photo-upload-area" id="photoUploadArea">
+								<input
+									type="file"
+									id="photoInput"
+									accept="image/*"
+									style="display: none"
+								/>
+								<div class="photo-preview" id="photoPreview">
+									<span style="font-size: 3rem">📷</span>
+									<p style="color: var(--text-secondary); font-size: 0.85rem">
+										Нажмите чтобы выбрать фото
+									</p>
+								</div>
+							</div>
+							<div class="fin-group">
+								<label class="fin-label">Дата</label
+								><input type="date" class="fin-field" id="photoDate" />
+							</div>
+							<div class="fin-group">
+								<label class="fin-label">Подпись</label
+								><input
+									type="text"
+									class="fin-field"
+									id="photoCaption"
+									placeholder="Что это за день?"
+								/>
+							</div>
+							<button class="fin-btn fin-btn-primary" id="savePhotoBtn">
+								💾 Сохранить
+							</button>
+						</div>
+						<div class="photo-grid" id="photoGrid">
+							<p class="empty-text">Нет фото. Добавьте первое!</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== МОДЕРАЦИЯ ===== -->
+				<div class="page" id="page-moderation">
+					<div class="top-bar">
+						<h1 class="page-title">Модерация</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeToggleModeration">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="moderation-container">
+						<div class="moderation-header">
+							<h3>👥 Пользователи</h3>
+							<button class="add-user-btn" id="addUserBtn">+ Добавить</button>
+						</div>
+						<div class="users-table-wrap">
+							<table class="users-table">
+								<thead>
+									<tr>
+										<th>Логин</th>
+										<th>Имя</th>
+										<th>Роль</th>
+										<th>Действия</th>
+									</tr>
+								</thead>
+								<tbody id="usersTableBody"></tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== НАСТРОЙКИ ===== -->
+				<div class="page" id="page-settings">
+					<div class="top-bar">
+						<h1 class="page-title">Настройки</h1>
+						<div class="top-actions">
+							<button class="theme-toggle" id="themeToggleSettings">
+								<span class="theme-icon-dark">🌙</span
+								><span class="theme-icon-light">☀️</span>
+							</button>
+							<div class="avatar">А</div>
+						</div>
+					</div>
+					<div class="settings-container">
+						<div class="card settings-card">
+							<h2 class="settings-title">🎨 Оформление</h2>
+							<p class="settings-desc">Выберите тему</p>
+							<div class="theme-selector">
+								<label class="theme-option"
+									><input type="radio" name="theme" value="dark" checked /><span
+										class="theme-preview dark-preview"
+										><span class="preview-sidebar"></span
+										><span class="preview-content"
+											><span class="preview-line"></span
+											><span class="preview-line short"></span></span></span
+									><span class="theme-name">Тёмная</span></label
+								><label class="theme-option"
+									><input type="radio" name="theme" value="light" /><span
+										class="theme-preview light-preview"
+										><span class="preview-sidebar"></span
+										><span class="preview-content"
+											><span class="preview-line"></span
+											><span class="preview-line short"></span></span></span
+									><span class="theme-name">Светлая</span></label
+								><label class="theme-option"
+									><input type="radio" name="theme" value="ocean" /><span
+										class="theme-preview ocean-preview"
+										><span class="preview-sidebar"></span
+										><span class="preview-content"
+											><span class="preview-line"></span
+											><span class="preview-line short"></span></span></span
+									><span class="theme-name">Океан</span></label
+								><label class="theme-option"
+									><input type="radio" name="theme" value="forest" /><span
+										class="theme-preview forest-preview"
+										><span class="preview-sidebar"></span
+										><span class="preview-content"
+											><span class="preview-line"></span
+											><span class="preview-line short"></span></span></span
+									><span class="theme-name">Лес</span></label
+								>
+							</div>
+						</div>
+						<div class="card settings-card">
+							<h2 class="settings-title">⚙️ Основные</h2>
+							<div class="setting-item">
+								<span>Уведомления</span
+								><label class="switch"
+									><input type="checkbox" checked /><span class="slider"></span
+								></label>
+							</div>
+							<div class="setting-item">
+								<span>Автосохранение</span
+								><label class="switch"
+									><input type="checkbox" /><span class="slider"></span
+								></label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+
+		<!-- Модалка задачи -->
+		<div class="modal-overlay" id="taskModal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 id="modalTitle">Новая задача</h3>
+					<button class="modal-close" id="closeModal">✕</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>Название</label
+						><input
+							type="text"
+							id="taskTitle"
+							placeholder="Название задачи..."
+						/>
+					</div>
+					<div class="form-group">
+						<label>Описание</label
+						><textarea
+							id="taskDescription"
+							rows="2"
+							placeholder="Описание..."
+						></textarea>
+					</div>
+					<div class="form-row">
+						<div class="form-group">
+							<label>Дата</label><input type="date" id="taskDate" />
+						</div>
+						<div class="form-group">
+							<label>Время</label><input type="time" id="taskTime" />
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group">
+							<label>Приоритет</label
+							><select id="taskPriority">
+								<option value="low">Низкий</option>
+								<option value="medium" selected>Средний</option>
+								<option value="high">Высокий</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>&nbsp;</label
+							><label
+								style="
+									display: flex;
+									align-items: center;
+									gap: 8px;
+									padding-top: 8px;
+									cursor: pointer;
+								"
+								><input type="checkbox" id="taskCompleted" /> Выполнено</label
+							>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" id="cancelTask">Отмена</button
+					><button class="btn btn-primary" id="saveTask">Сохранить</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Модалка пользователя -->
+		<div class="user-modal-overlay" id="userModalOverlay">
+			<div class="user-modal">
+				<h3 id="userModalTitle">Добавить пользователя</h3>
+				<div class="form-group">
+					<label>Логин</label
+					><input type="text" id="modalUsername" placeholder="Логин" />
+				</div>
+				<div class="form-group">
+					<label>Пароль</label
+					><input type="password" id="modalPassword" placeholder="Пароль" />
+				</div>
+				<div class="form-group">
+					<label>Имя</label
+					><input type="text" id="modalName" placeholder="Имя" />
+				</div>
+				<div class="form-group">
+					<label>Роль</label
+					><select id="modalRole">
+						<option value="user">Пользователь</option>
+						<option value="admin">Админ</option>
+					</select>
+				</div>
+				<div class="user-modal-footer">
+					<button class="btn btn-secondary" id="cancelUserBtn">Отмена</button
+					><button class="btn btn-primary" id="saveUserBtn">Сохранить</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Модалка места -->
+		<div class="fun-modal" id="placeModal">
+			<div class="fun-modal-content">
+				<h3 id="placeModalTitle">Новое место</h3>
+				<div class="fin-group">
+					<label class="fin-label">Название</label
+					><input
+						type="text"
+						class="fin-field"
+						id="placeName"
+						placeholder="Название места"
+					/>
+				</div>
+				<div class="fin-group">
+					<label class="fin-label">Категория</label
+					><select class="fin-field" id="placeCategory">
+						<option value="cafe">☕ Кафе</option>
+						<option value="restaurant">🍽️ Ресторан</option>
+						<option value="park">🌳 Парк</option>
+						<option value="museum">🏛️ Музей</option>
+						<option value="entertainment">🎮 Развлечения</option>
+						<option value="other">📌 Другое</option>
+					</select>
+				</div>
+				<div class="fin-group">
+					<label class="fin-label">Описание</label
+					><input
+						type="text"
+						class="fin-field"
+						id="placeDesc"
+						placeholder="Краткое описание"
+					/>
+				</div>
+				<div class="fun-modal-footer">
+					<button class="fun-card-btn" id="cancelPlaceBtn">Отмена</button
+					><button class="fun-card-btn visited-btn" id="savePlaceBtn">
+						Сохранить
+					</button>
+				</div>
+			</div>
+		</div>
+		<!-- Модалка еды -->
+		<div class="fun-modal" id="foodModal">
+			<div class="fun-modal-content">
+				<h3 id="foodModalTitle">Новый рецепт</h3>
+				<div class="fin-group">
+					<label class="fin-label">Название</label
+					><input
+						type="text"
+						class="fin-field"
+						id="foodName"
+						placeholder="Название блюда"
+					/>
+				</div>
+				<div class="fin-group">
+					<label class="fin-label">Тип</label
+					><select class="fin-field" id="foodType">
+						<option value="pp">🥗 ПП</option>
+						<option value="junk">🍔 Джанк-фуд</option>
+						<option value="drink">🥤 Напиток</option>
+						<option value="main">🍝 Основное</option>
+						<option value="dessert">🍰 Десерт</option>
+						<option value="other">📌 Другое</option>
+					</select>
+				</div>
+				<div class="fin-group">
+					<label class="fin-label">Оценка</label
+					><select class="fin-field" id="foodRating">
+						<option value="tasty">👍 Вкусно</option>
+						<option value="nottasty">👎 Не вкусно</option>
+					</select>
+				</div>
+				<div class="fin-group">
+					<label class="fin-label">Описание / Рецепт</label
+					><textarea
+						class="fin-field"
+						id="foodDesc"
+						rows="3"
+						placeholder="Краткий рецепт..."
+					></textarea>
+				</div>
+				<div class="fun-modal-footer">
+					<button class="fun-card-btn" id="cancelFoodBtn">Отмена</button
+					><button class="fun-card-btn visited-btn" id="saveFoodBtn">
+						Сохранить
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Модалка просмотра -->
+		<div class="fun-modal" id="watchModal">
+			<div class="fun-modal-content">
+				<h3 id="watchModalTitle">Добавить</h3>
+				<div class="fin-group">
+					<label class="fin-label">Название</label
+					><input
+						type="text"
+						class="fin-field"
+						id="watchName"
+						placeholder="Название"
+					/>
+				</div>
+				<div class="fin-group">
+					<label class="fin-label">Тип</label
+					><select class="fin-field" id="watchType">
+						<option value="movie">🎥 Фильм</option>
+						<option value="series">📺 Сериал</option>
+						<option value="anime">🗾 Аниме</option>
+						<option value="cartoon">🐱 Мультфильм</option>
+						<option value="video">📹 Видео</option>
+					</select>
+				</div>
+				<div class="fin-group">
+					<label class="fin-label">Описание</label
+					><input
+						type="text"
+						class="fin-field"
+						id="watchDesc"
+						placeholder="Краткое описание"
+					/>
+				</div>
+				<div class="fun-modal-footer">
+					<button class="fun-card-btn" id="cancelWatchBtn">Отмена</button
+					><button class="fun-card-btn visited-btn" id="saveWatchBtn">
+						Сохранить
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Модалка покупки -->
+		<div class="fun-modal" id="shopModal">
+			<div class="fun-modal-content">
+				<h3 id="shopModalTitle">Новый товар</h3>
+				<div class="fin-group">
+					<label class="fin-label">Название</label
+					><input
+						type="text"
+						class="fin-field"
+						id="shopName"
+						placeholder="Название товара"
+					/>
+				</div>
+				<div class="fin-group">
+					<label class="fin-label">Ссылка</label
+					><input
+						type="url"
+						class="fin-field"
+						id="shopLink"
+						placeholder="https://..."
+					/>
+				</div>
+				<div class="fin-row">
+					<div class="fin-group">
+						<label class="fin-label">Цена</label
+						><input
+							type="number"
+							class="fin-field"
+							id="shopPrice"
+							placeholder="0"
+						/>
+					</div>
+					<div class="fin-group">
+						<label class="fin-label">Категория</label
+						><select class="fin-field" id="shopCategory">
+							<option value="electronics">📱 Электроника</option>
+							<option value="clothes">👕 Одежда</option>
+							<option value="home">🏠 Дом</option>
+							<option value="beauty">💄 Красота</option>
+							<option value="sport">⚽ Спорт</option>
+							<option value="books">📚 Книги</option>
+							<option value="other">📌 Другое</option>
+						</select>
+					</div>
+				</div>
+				<div class="fin-row">
+					<div class="fin-group">
+						<label class="fin-label">Назначение</label
+						><select class="fin-field" id="shopPurpose">
+							<option value="self">👤 Себе</option>
+							<option value="gift">🎁 Подарок</option>
+						</select>
+					</div>
+					<div class="fin-group">
+						<label class="fin-label">Для кого (если подарок)</label
+						><input
+							type="text"
+							class="fin-field"
+							id="shopRecipient"
+							placeholder="Имя"
+						/>
+					</div>
+				</div>
+				<div class="fin-group">
+					<label class="fin-label">Заметка</label
+					><input
+						type="text"
+						class="fin-field"
+						id="shopNote"
+						placeholder="Заметка..."
+					/>
+				</div>
+				<div class="fun-modal-footer">
+					<button class="fun-card-btn" id="cancelShopBtn">Отмена</button
+					><button class="fun-card-btn visited-btn" id="saveShopBtn">
+						Сохранить
+					</button>
+				</div>
+			</div>
+		</div>
+		<!-- Модалка цели -->
+		<div class="fun-modal" id="goalModal">
+			<div class="fun-modal-content">
+				<h3 id="goalModalTitle">Новая цель</h3>
+				<div class="fin-group">
+					<label class="fin-label">Название</label
+					><input
+						type="text"
+						class="fin-field"
+						id="goalName"
+						placeholder="Название цели"
+					/>
+				</div>
+				<div class="fin-group">
+					<label class="fin-label">Описание</label
+					><input
+						type="text"
+						class="fin-field"
+						id="goalDesc"
+						placeholder="Краткое описание"
+					/>
+				</div>
+				<div class="fin-row">
+					<div class="fin-group">
+						<label class="fin-label">Прогресс (%)</label
+						><input
+							type="number"
+							class="fin-field"
+							id="goalProgress"
+							placeholder="0"
+							min="0"
+							max="100"
+						/>
+					</div>
+					<div class="fin-group">
+						<label class="fin-label">Категория</label
+						><select class="fin-field" id="goalCategory">
+							<option value="personal">👤 Личное</option>
+							<option value="work">💼 Работа</option>
+							<option value="health">🩸 Здоровье</option>
+							<option value="finance">💰 Финансы</option>
+							<option value="learn">📚 Обучение</option>
+							<option value="other">📌 Другое</option>
+						</select>
+					</div>
+				</div>
+				<div class="fin-group" id="goalParentGroup">
+					<label class="fin-label">Родительская цель</label
+					><select class="fin-field" id="goalParent">
+						<option value="">— Без родителя —</option>
+					</select>
+				</div>
+				<div class="fun-modal-footer">
+					<button class="fun-card-btn" id="cancelGoalBtn">Отмена</button
+					><button class="fun-card-btn visited-btn" id="saveGoalBtn">
+						Сохранить
+					</button>
+				</div>
+			</div>
+		</div>
+		<!-- Модалка ссылки -->
+		<div class="fun-modal" id="linkModal">
+			<div class="fun-modal-content">
+				<h3 id="linkModalTitle">Новая ссылка</h3>
+				<div class="fin-group">
+					<label class="fin-label">Название</label
+					><input
+						type="text"
+						class="fin-field"
+						id="linkTitle"
+						placeholder="Название"
+					/>
+				</div>
+				<div class="fin-group">
+					<label class="fin-label">URL</label
+					><input
+						type="url"
+						class="fin-field"
+						id="linkUrl"
+						placeholder="https://..."
+					/>
+				</div>
+				<div class="fin-row">
+					<div class="fin-group">
+						<label class="fin-label">Категория</label
+						><select class="fin-field" id="linkCategory">
+							<option value="tools">🛠️ Инструменты</option>
+							<option value="articles">📄 Статьи</option>
+							<option value="video">🎥 Видео</option>
+							<option value="dev">💻 Разработка</option>
+							<option value="design">🎨 Дизайн</option>
+							<option value="social">📱 Соцсети</option>
+							<option value="other">📌 Другое</option>
+						</select>
+					</div>
+					<div class="fin-group">
+						<label class="fin-label">Теги (через запятую)</label
+						><input
+							type="text"
+							class="fin-field"
+							id="linkTags"
+							placeholder="полезное, работа"
+						/>
+					</div>
+				</div>
+				<div class="fin-group">
+					<label class="fin-label">Заметка</label
+					><input
+						type="text"
+						class="fin-field"
+						id="linkNote"
+						placeholder="Краткая заметка..."
+					/>
+				</div>
+				<div class="fun-modal-footer">
+					<button class="fun-card-btn" id="cancelLinkBtn">Отмена</button
+					><button class="fun-card-btn visited-btn" id="saveLinkBtn">
+						Сохранить
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- СКРИПТЫ -->
+		<script src="js/storage.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/auth.js"></script>
+		<script src="js/theme-manager.js"></script>
+		<script src="js/calendar.js"></script>
+		<script src="js/tasks.js"></script>
+		<script src="js/salary.js"></script>
+		<script src="js/finance.js"></script>
+		<script src="js/analytics.js"></script>
+		<script src="js/weather.js"></script>
+		<script src="js/overview.js"></script>
+		<script src="js/places.js"></script>
+		<script src="js/food.js"></script>
+		<script src="js/watch.js"></script>
+		<script src="js/shopping.js"></script>
+		<script src="js/links.js"></script>
+		<script src="js/photodiary.js"></script>
+		<script src="js/health.js"></script>
+		<script src="js/goals.js"></script>
+		<script src="js/friends.js"></script>
+		<script src="js/messages.js"></script>
+		<script src="js/moderation.js"></script>
+		<script src="js/sidebar.js"></script>
+		<script src="js/dashboard.js"></script>
+	</body>
+</html>

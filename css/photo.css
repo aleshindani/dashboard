@@ -1,0 +1,193 @@
+/* ===== ФОТО-ДНЕВНИК ===== */
+.photo-layout {
+	display: grid;
+	grid-template-columns: 280px 1fr;
+	gap: 16px;
+}
+
+.photo-upload-card {
+	background: var(--bg-card);
+	border-radius: 14px;
+	padding: 16px;
+	border: 1px solid var(--border);
+	position: sticky;
+	top: 20px;
+	height: fit-content;
+}
+
+.card-subtitle {
+	font-size: 0.85rem;
+	font-weight: 600;
+	margin-bottom: 10px;
+	color: var(--text-primary);
+}
+
+.photo-upload-area {
+	border: 2px dashed var(--border);
+	border-radius: 10px;
+	padding: 20px;
+	text-align: center;
+	cursor: pointer;
+	transition: 0.2s;
+	margin-bottom: 10px;
+	min-height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.photo-upload-area:hover {
+	border-color: var(--accent);
+	background: var(--bg-secondary);
+}
+
+.photo-preview img {
+	max-width: 100%;
+	max-height: 150px;
+	border-radius: 8px;
+}
+
+/* Сетка фото */
+.photo-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 10px;
+	align-content: start;
+}
+
+.photo-item {
+	background: var(--bg-card);
+	border-radius: 10px;
+	overflow: hidden;
+	border: 1px solid var(--border);
+	transition: 0.2s;
+	cursor: pointer;
+}
+
+.photo-item:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow);
+}
+
+.photo-item img {
+	width: 100%;
+	height: 120px;
+	object-fit: cover;
+	display: block;
+}
+
+.photo-item-info {
+	padding: 6px 8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 4px;
+}
+
+.photo-item-text {
+	flex: 1;
+	min-width: 0;
+}
+
+.photo-item-date {
+	font-size: 0.65rem;
+	color: var(--accent-light);
+	font-weight: 600;
+}
+
+.photo-item-caption {
+	font-size: 0.72rem;
+	color: var(--text-primary);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.photo-item-del {
+	width: 20px;
+	height: 20px;
+	border-radius: 4px;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	color: var(--text-secondary);
+	font-size: 0.6rem;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.photo-item-del:hover {
+	color: #ef4444;
+	background: rgba(239, 68, 68, 0.1);
+}
+
+/* Просмотр фото */
+.photo-viewer {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.95);
+	z-index: 2000;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+.photo-viewer.active {
+	display: flex;
+}
+
+.photo-viewer img {
+	max-width: 90%;
+	max-height: 85vh;
+	border-radius: 12px;
+}
+
+.photo-viewer-close {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	border: none;
+	background: rgba(255, 255, 255, 0.2);
+	color: white;
+	font-size: 1.1rem;
+	cursor: pointer;
+}
+.photo-viewer-close:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.photo-viewer-caption {
+	position: absolute;
+	bottom: 24px;
+	color: white;
+	font-size: 0.9rem;
+	text-align: center;
+}
+
+.empty-text {
+	grid-column: 1 / -1;
+	text-align: center;
+	color: var(--text-secondary);
+	font-size: 0.85rem;
+	padding: 30px;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+	.photo-layout {
+		grid-template-columns: 1fr;
+	}
+	.photo-upload-card {
+		position: static;
+	}
+	.photo-grid {
+		grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+	}
+	.photo-item img {
+		height: 100px;
+	}
+}

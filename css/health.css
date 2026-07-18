@@ -1,0 +1,163 @@
+/* ===== ЗДОРОВЬЕ ===== */
+.health-layout {
+	display: grid;
+	grid-template-columns: 360px 1fr;
+	gap: 16px;
+}
+
+.card-subtitle {
+	font-size: 0.9rem;
+	font-weight: 600;
+	margin-bottom: 12px;
+	color: var(--text-primary);
+}
+
+.health-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.health-stats {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+}
+
+.health-stat-item {
+	text-align: center;
+	padding: 12px 8px;
+	background: var(--bg-secondary);
+	border-radius: 8px;
+	border: 1px solid var(--border);
+}
+
+.health-stat-value {
+	font-size: 1.4rem;
+	font-weight: 700;
+	color: var(--accent-light);
+	display: block;
+}
+
+.health-stat-label {
+	font-size: 0.65rem;
+	color: var(--text-secondary);
+	text-transform: uppercase;
+}
+
+/* График */
+.sugar-chart {
+	min-height: 150px;
+	display: flex;
+	align-items: flex-end;
+	gap: 6px;
+	padding: 10px 0;
+}
+
+.sugar-bar-group {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2px;
+}
+
+.sugar-bar {
+	width: 100%;
+	max-width: 40px;
+	border-radius: 4px 4px 0 0;
+	min-height: 4px;
+	transition: height 0.3s;
+}
+
+.sugar-bar.normal {
+	background: #4ade80;
+}
+.sugar-bar.high {
+	background: #f59e0b;
+}
+.sugar-bar.very-high {
+	background: #ef4444;
+}
+.sugar-bar.low {
+	background: #3b82f6;
+}
+
+.sugar-bar-time {
+	font-size: 0.6rem;
+	color: var(--text-secondary);
+	writing-mode: vertical-lr;
+}
+
+/* История */
+.health-history {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	max-height: 350px;
+	overflow-y: auto;
+}
+
+.health-record {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 12px;
+	border-radius: 8px;
+	background: var(--bg-secondary);
+	font-size: 0.85rem;
+}
+
+.health-record-sugar {
+	font-weight: 700;
+	font-size: 1rem;
+	min-width: 50px;
+}
+
+.health-record-sugar.normal {
+	color: #4ade80;
+}
+.health-record-sugar.high {
+	color: #f59e0b;
+}
+.health-record-sugar.very-high {
+	color: #ef4444;
+}
+.health-record-sugar.low {
+	color: #3b82f6;
+}
+
+.health-record-info {
+	flex: 1;
+}
+.health-record-detail {
+	font-size: 0.7rem;
+	color: var(--text-secondary);
+}
+
+.health-record-del {
+	width: 24px;
+	height: 24px;
+	border-radius: 4px;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	color: var(--text-secondary);
+	font-size: 0.7rem;
+}
+.health-record-del:hover {
+	color: #ef4444;
+}
+
+.empty-text {
+	text-align: center;
+	color: var(--text-secondary);
+	font-size: 0.85rem;
+	padding: 20px;
+}
+
+@media (max-width: 768px) {
+	.health-layout {
+		grid-template-columns: 1fr;
+	}
+}

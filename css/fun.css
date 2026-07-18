@@ -1,0 +1,308 @@
+/* ===== РАЗВЛЕЧЕНИЯ ===== */
+.fun-layout {
+	display: grid;
+	grid-template-columns: 220px 1fr;
+	gap: 16px;
+}
+
+.fun-sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.fun-add-btn {
+	padding: 10px 14px;
+	border-radius: 10px;
+	border: none;
+	background: var(--accent);
+	color: white;
+	font-size: 0.85rem;
+	font-weight: 600;
+	cursor: pointer;
+	font-family: inherit;
+	transition: 0.2s;
+	width: 100%;
+}
+
+.fun-add-btn:hover {
+	background: var(--accent-light);
+	box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.fun-search {
+	width: 100%;
+	padding: 8px 12px;
+	border-radius: 8px;
+	border: 1px solid var(--border);
+	background: var(--bg-card);
+	color: var(--text-primary);
+	font-family: inherit;
+	font-size: 0.8rem;
+	outline: none;
+	transition: 0.2s;
+}
+
+.fun-search:focus {
+	border-color: var(--accent);
+	box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.fun-search::placeholder {
+	color: var(--text-secondary);
+}
+
+.fun-filter-card {
+	background: var(--bg-card);
+	border-radius: 12px;
+	padding: 12px 14px;
+	border: 1px solid var(--border);
+}
+
+.fun-filter-title {
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: var(--text-secondary);
+	margin-bottom: 6px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.fun-filter-btn {
+	display: block;
+	width: 100%;
+	padding: 5px 8px;
+	border: none;
+	background: none;
+	color: var(--text-secondary);
+	cursor: pointer;
+	font-size: 0.78rem;
+	text-align: left;
+	border-radius: 5px;
+	transition: 0.15s;
+	font-family: inherit;
+}
+
+.fun-filter-btn:hover {
+	background: var(--hover-bg);
+	color: var(--text-primary);
+}
+
+.fun-filter-btn.active {
+	background: var(--accent);
+	color: white;
+	font-weight: 600;
+}
+
+/* Сетка карточек */
+.fun-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 12px;
+	align-content: start;
+}
+
+.fun-card {
+	background: var(--bg-card);
+	border-radius: 12px;
+	padding: 14px 16px;
+	border: 1px solid var(--border);
+	transition: 0.2s;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.fun-card:hover {
+	border-color: var(--accent);
+	box-shadow: var(--shadow);
+}
+
+.fun-card.visited {
+	opacity: 0.55;
+}
+
+.fun-card.visited .fun-card-title {
+	text-decoration: line-through;
+}
+
+.fun-card-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 8px;
+}
+
+.fun-card-title {
+	font-weight: 600;
+	font-size: 0.9rem;
+	color: var(--text-primary);
+	word-break: break-word;
+	line-height: 1.3;
+}
+
+.fun-card-badge {
+	font-size: 0.65rem;
+	padding: 3px 8px;
+	border-radius: 10px;
+	background: var(--bg-secondary);
+	color: var(--text-secondary);
+	font-weight: 500;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+.fun-card-desc {
+	font-size: 0.8rem;
+	color: var(--text-secondary);
+	line-height: 1.4;
+	word-break: break-word;
+	display: -webkit-box;
+	-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.fun-card-meta {
+	font-size: 0.7rem;
+	color: var(--text-secondary);
+}
+
+.fun-card-actions {
+	display: flex;
+	gap: 5px;
+	flex-wrap: wrap;
+}
+
+.fun-card-btn {
+	padding: 5px 10px;
+	border-radius: 5px;
+	border: 1px solid var(--border);
+	background: var(--bg-secondary);
+	color: var(--text-primary);
+	cursor: pointer;
+	font-size: 0.7rem;
+	font-family: inherit;
+	transition: 0.15s;
+	white-space: nowrap;
+}
+
+.fun-card-btn:hover {
+	border-color: var(--accent);
+	background: var(--accent);
+	color: white;
+}
+
+.fun-card-btn.visited-btn {
+	background: rgba(74, 222, 128, 0.1);
+	border-color: rgba(74, 222, 128, 0.3);
+	color: #4ade80;
+}
+
+.fun-card-btn.visited-btn.was {
+	background: rgba(74, 222, 128, 0.25);
+}
+
+.fun-card-btn.visited-btn:hover {
+	background: #4ade80;
+	color: white;
+}
+
+.fun-card-btn.delete-btn {
+	border-color: rgba(239, 68, 68, 0.3);
+	color: #f87171;
+}
+
+.fun-card-btn.delete-btn:hover {
+	background: #ef4444;
+	color: white;
+}
+
+.fun-empty {
+	text-align: center;
+	color: var(--text-secondary);
+	font-size: 0.85rem;
+	padding: 40px;
+	grid-column: 1 / -1;
+}
+
+/* Модалка */
+.fun-modal {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.7);
+	z-index: 1000;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+.fun-modal.active {
+	display: flex;
+}
+
+.fun-modal-content {
+	background: var(--bg-card);
+	border-radius: 16px;
+	padding: 24px;
+	border: 1px solid var(--border);
+	width: 100%;
+	max-width: 420px;
+}
+
+.fun-modal-content h3 {
+	font-size: 1rem;
+	margin-bottom: 16px;
+}
+
+.fun-modal .fin-group {
+	margin-bottom: 12px;
+}
+
+.fun-modal .fin-label {
+	display: block;
+	font-size: 0.75rem;
+	color: var(--text-secondary);
+	margin-bottom: 4px;
+	font-weight: 500;
+}
+
+.fun-modal .fin-field {
+	width: 100%;
+	padding: 10px 12px;
+	border-radius: 8px;
+	border: 1px solid var(--border);
+	background: var(--bg-secondary);
+	color: var(--text-primary);
+	font-family: inherit;
+	font-size: 0.85rem;
+	outline: none;
+	transition: 0.2s;
+}
+
+.fun-modal .fin-field:focus {
+	border-color: var(--accent);
+	box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+textarea.fin-field {
+	resize: vertical;
+	min-height: 60px;
+}
+
+.fun-modal-footer {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+	margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+	.fun-layout {
+		grid-template-columns: 1fr;
+	}
+	.fun-list {
+		grid-template-columns: 1fr;
+	}
+}

@@ -1,0 +1,403 @@
+/* ===== СТРАНИЦА ЗАРПЛАТЫ ===== */
+.salary-layout {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+	max-width: 1100px;
+}
+
+/* Левая колонка */
+.salary-left {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.salary-month-selector {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: var(--bg-card);
+	border-radius: var(--radius);
+	padding: 12px 16px;
+	border: 1px solid var(--border);
+}
+
+.salary-month-selector .calendar-month-year {
+	font-size: 1.1rem;
+	font-weight: 700;
+	flex: 1;
+	text-align: center;
+}
+
+/* Панель ввода выдач */
+.issues-panel {
+	background: var(--bg-card);
+	border-radius: var(--radius);
+	border: 1px solid var(--border);
+	overflow: hidden;
+}
+
+.issues-panel-header {
+	padding: 16px 20px;
+	border-bottom: 1px solid var(--border);
+}
+
+.issues-date-display {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.issues-date-icon {
+	font-size: 1.4rem;
+}
+
+.issues-date-text {
+	font-size: 1.1rem;
+	font-weight: 600;
+}
+
+.issues-today-badge {
+	background: var(--accent);
+	color: white;
+	padding: 2px 10px;
+	border-radius: 12px;
+	font-size: 0.7rem;
+	font-weight: 600;
+}
+
+.issues-warn-badge {
+	background: rgba(239, 68, 68, 0.15);
+	color: #ef4444;
+	padding: 2px 10px;
+	border-radius: 12px;
+	font-size: 0.7rem;
+	font-weight: 600;
+}
+
+.issues-input-row {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.issues-input-group {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.issues-input-label {
+	font-size: 0.8rem;
+	color: var(--text-secondary);
+	font-weight: 500;
+}
+
+.issues-input-wrap {
+	display: flex;
+	gap: 8px;
+}
+
+.issues-main-input {
+	flex: 1;
+	padding: 14px 16px;
+	border-radius: var(--radius-sm);
+	border: 2px solid var(--border);
+	background: var(--bg-secondary);
+	color: var(--text-primary);
+	font-family: inherit;
+	font-size: 1.3rem;
+	font-weight: 600;
+	text-align: center;
+	transition: var(--transition);
+	max-width: 200px;
+}
+
+.issues-main-input:focus {
+	outline: none;
+	border-color: var(--accent);
+	box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+.issues-save-btn {
+	padding: 14px 20px;
+	border-radius: var(--radius-sm);
+	border: none;
+	background: var(--accent);
+	color: white;
+	font-size: 0.9rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: var(--transition);
+	font-family: inherit;
+	white-space: nowrap;
+}
+
+.issues-save-btn:hover {
+	background: var(--accent-light);
+	box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.issues-preview {
+	background: var(--bg-secondary);
+	border-radius: var(--radius-sm);
+	padding: 14px;
+}
+
+.issues-preview-label {
+	font-size: 0.75rem;
+	color: var(--text-secondary);
+	margin-bottom: 4px;
+}
+
+.issues-preview-formula {
+	font-size: 0.85rem;
+	color: var(--text-secondary);
+	margin-bottom: 4px;
+}
+
+.issues-preview-formula strong {
+	color: #f59e0b;
+}
+
+.issues-preview-total {
+	font-size: 1rem;
+	color: var(--text-primary);
+}
+
+.issues-preview-total strong {
+	color: var(--accent-light);
+}
+
+/* Сводка */
+.salary-summary {
+	background: var(--bg-card);
+	border-radius: var(--radius);
+	border: 1px solid var(--border);
+	overflow: hidden;
+}
+
+.salary-summary-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.salary-summary-item {
+	padding: 16px;
+	text-align: center;
+	border-right: 1px solid var(--border);
+}
+
+.salary-summary-item:last-child {
+	border-right: none;
+}
+
+.salary-summary-label {
+	font-size: 0.7rem;
+	color: var(--text-secondary);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	margin-bottom: 4px;
+}
+
+.salary-summary-value {
+	font-size: 1.3rem;
+	font-weight: 700;
+	color: var(--text-primary);
+}
+
+.salary-summary-value.accent {
+	color: var(--accent-light);
+}
+
+.salary-total {
+	background: linear-gradient(135deg, var(--accent), var(--accent-light));
+	padding: 14px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.salary-total-label {
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 0.9rem;
+}
+
+.salary-total-value {
+	color: white;
+	font-size: 1.8rem;
+	font-weight: 800;
+}
+
+/* Список дней */
+.salary-right {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.salary-days-header {
+	background: var(--bg-card);
+	border-radius: var(--radius) var(--radius) 0 0;
+	padding: 14px 20px;
+	border: 1px solid var(--border);
+	border-bottom: none;
+	font-weight: 600;
+	font-size: 0.95rem;
+}
+
+.salary-days-list {
+	background: var(--bg-card);
+	border-radius: 0 0 var(--radius) var(--radius);
+	border: 1px solid var(--border);
+	border-top: none;
+	max-height: 550px;
+	overflow-y: auto;
+}
+
+.salary-empty-state {
+	padding: 40px;
+	text-align: center;
+	color: var(--text-secondary);
+}
+
+/* Карточка дня */
+.salary-day-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 16px;
+	border-bottom: 1px solid var(--border);
+	cursor: pointer;
+	transition: var(--transition);
+}
+
+.salary-day-item:last-child {
+	border-bottom: none;
+}
+
+.salary-day-item:hover {
+	background: var(--bg-secondary);
+}
+
+.salary-day-item.selected {
+	background: var(--bg-secondary);
+	border-left: 3px solid var(--accent);
+	padding-left: 13px;
+}
+
+.salary-day-item.today {
+	background: rgba(108, 99, 255, 0.05);
+}
+
+.salary-day-left {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-width: 40px;
+}
+
+.salary-day-date {
+	font-size: 1.3rem;
+	font-weight: 700;
+	color: var(--text-primary);
+	line-height: 1;
+}
+
+.salary-day-weekday {
+	font-size: 0.7rem;
+	color: var(--text-secondary);
+}
+
+.salary-day-center {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.salary-day-issues {
+	font-size: 0.85rem;
+	color: var(--text-primary);
+}
+
+.salary-day-bonus {
+	font-size: 0.75rem;
+	color: #f59e0b;
+	font-weight: 500;
+}
+
+.salary-day-right {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.salary-day-total {
+	font-weight: 700;
+	color: var(--accent-light);
+	font-size: 0.95rem;
+}
+
+.salary-day-edit {
+	font-size: 0.8rem;
+	opacity: 0.5;
+}
+
+/* Подсказка */
+.salary-hint {
+	text-align: center;
+	padding: 12px;
+	color: var(--text-secondary);
+	font-size: 0.8rem;
+	background: var(--bg-card);
+	border-radius: var(--radius);
+	border: 1px solid var(--border);
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 900px) {
+	.salary-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.salary-summary-grid {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+
+	.salary-days-list {
+		max-height: 400px;
+	}
+}
+
+@media (max-width: 600px) {
+	.salary-summary-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.salary-summary-item {
+		border-right: none;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.salary-summary-item:last-child {
+		border-bottom: none;
+	}
+
+	.salary-total {
+		flex-direction: column;
+		gap: 4px;
+		text-align: center;
+	}
+
+	.issues-input-wrap {
+		flex-direction: column;
+	}
+
+	.issues-main-input {
+		max-width: 100%;
+	}
+}

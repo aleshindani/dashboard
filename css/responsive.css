@@ -1,0 +1,388 @@
+/* ===== АДАПТИВНОСТЬ ===== */
+
+/* Планшеты и маленькие ноутбуки (до 1024px) */
+@media (max-width: 1024px) {
+	.dashboard {
+		grid-template-columns: 200px 1fr;
+	}
+
+	.main-content {
+		padding: 14px 16px;
+	}
+
+	.overview-top-row {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.overview-bottom-row {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.calendar-layout {
+		grid-template-columns: 1fr 280px;
+	}
+
+	.finance-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.tasks-layout {
+		grid-template-columns: 200px 1fr;
+	}
+}
+
+/* Планшеты (до 900px) */
+@media (max-width: 900px) {
+	.dashboard {
+		grid-template-columns: 1fr;
+	}
+
+	.sidebar {
+		position: fixed;
+		left: -220px;
+		top: 0;
+		bottom: 0;
+		width: 220px;
+		z-index: 100;
+		transition: left 0.3s ease;
+	}
+
+	.sidebar.open {
+		left: 0;
+	}
+
+	.menu-toggle {
+		display: flex !important;
+		position: fixed;
+		top: 12px;
+		left: 12px;
+		z-index: 200;
+		width: 38px;
+		height: 38px;
+		border-radius: 50%;
+		background: var(--bg-card);
+		border: 1px solid var(--border);
+		color: var(--text-primary);
+		font-size: 1.1rem;
+		cursor: pointer;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+	}
+
+	.main-content {
+		padding: 12px 14px;
+		padding-top: 50px;
+	}
+
+	.overview-top-row,
+	.overview-middle-row,
+	.overview-bottom-row {
+		grid-template-columns: 1fr;
+	}
+
+	.calendar-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.calendar-sidebar {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	}
+
+	.tasks-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.tasks-sidebar {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		gap: 8px;
+	}
+
+	.salary-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.fun-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.fun-list {
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	}
+
+	.health-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.goals-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.photo-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.analytics-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.places-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.messages-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.today-card {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+	}
+
+	.today-divider {
+		width: 100%;
+		height: 1px;
+	}
+
+	.today-day-number {
+		font-size: 2.2rem;
+	}
+}
+
+/* Телефоны (до 600px) */
+@media (max-width: 600px) {
+	.main-content {
+		padding: 10px 10px;
+		padding-top: 48px;
+	}
+
+	.top-bar {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+		margin-bottom: 14px;
+	}
+
+	.page-title {
+		font-size: 1.2rem;
+	}
+
+	.top-actions {
+		width: 100%;
+		justify-content: flex-end;
+	}
+
+	.today-day-number {
+		font-size: 1.8rem;
+	}
+
+	.today-card {
+		padding: 12px 14px;
+	}
+
+	.card {
+		padding: 12px 14px;
+	}
+
+	.summary-stats {
+		flex-direction: column;
+	}
+
+	.summary-item {
+		justify-content: space-between;
+	}
+
+	/* Календарь */
+	.calendar-panel {
+		padding: 8px;
+	}
+
+	.calendar-day {
+		font-size: 0.65rem;
+		border-radius: 3px;
+		aspect-ratio: 1;
+	}
+
+	.calendar-weekdays span {
+		font-size: 0.5rem;
+	}
+
+	.calendar-legend {
+		flex-direction: column;
+		gap: 3px;
+	}
+
+	.legend-item {
+		font-size: 0.6rem;
+		padding: 2px 5px;
+	}
+
+	/* Таблицы */
+	.salary-table {
+		font-size: 0.7rem;
+	}
+
+	.salary-table th,
+	.salary-table td {
+		padding: 6px 4px;
+	}
+
+	.issues-input {
+		width: 50px;
+		font-size: 0.7rem;
+	}
+
+	/* Формы */
+	.fin-row,
+	.form-row {
+		grid-template-columns: 1fr;
+	}
+
+	.fin-field,
+	.form-input {
+		padding: 8px 10px;
+		font-size: 0.8rem;
+	}
+
+	/* Карточки */
+	.fun-list {
+		grid-template-columns: 1fr;
+	}
+
+	.fun-card {
+		padding: 10px 12px;
+	}
+
+	.fun-card-title {
+		font-size: 0.8rem;
+	}
+
+	/* Модалки */
+	.modal-content,
+	.fun-modal-content,
+	.user-modal {
+		padding: 16px;
+		margin: 10px;
+	}
+
+	/* Финансы */
+	.fin-balance-amount {
+		font-size: 2rem;
+	}
+
+	/* Цели */
+	.xp-level {
+		font-size: 1.1rem;
+	}
+
+	/* Фото */
+	.photo-grid {
+		grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+	}
+
+	.photo-item img {
+		height: 100px;
+	}
+
+	/* Настройки */
+	.theme-selector {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.theme-preview {
+		height: 50px;
+	}
+
+	/* Чат */
+	.chat-msg {
+		max-width: 85%;
+	}
+
+	/* Кнопки */
+	.btn {
+		padding: 10px;
+		font-size: 0.8rem;
+	}
+
+	.fun-add-btn {
+		padding: 10px;
+		font-size: 0.8rem;
+	}
+}
+
+/* Маленькие телефоны (до 400px) */
+@media (max-width: 400px) {
+	.main-content {
+		padding: 8px 6px;
+		padding-top: 44px;
+	}
+
+	.top-bar {
+		gap: 4px;
+		margin-bottom: 10px;
+	}
+
+	.page-title {
+		font-size: 1.1rem;
+	}
+
+	.menu-toggle {
+		width: 32px;
+		height: 32px;
+		top: 8px;
+		left: 8px;
+	}
+
+	.today-day-number {
+		font-size: 1.5rem;
+	}
+
+	.card {
+		padding: 10px;
+	}
+
+	.calendar-day {
+		font-size: 0.6rem;
+	}
+
+	.fin-balance-amount {
+		font-size: 1.6rem;
+	}
+
+	.theme-selector {
+		grid-template-columns: 1fr 1fr;
+		gap: 8px;
+	}
+
+	.quick-actions {
+		grid-template-columns: 1fr;
+	}
+
+	.stats-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+/* Большие экраны (от 1400px) */
+@media (min-width: 1400px) {
+	.main-content {
+		padding: 24px 32px;
+		max-width: 1400px;
+		margin: 0 auto;
+	}
+
+	.overview-top-row {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+
+	.overview-bottom-row {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+
+	.fun-list {
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	}
+}

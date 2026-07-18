@@ -1,0 +1,444 @@
+/* ===== КАЛЕНДАРЬ ===== */
+.calendar-layout {
+	display: grid !important;
+	grid-template-columns: 1fr 260px;
+	gap: 12px;
+}
+
+.calendar-panel {
+	background: var(--bg-card);
+	border-radius: 10px;
+	padding: 12px 14px;
+	border: 1px solid var(--border);
+}
+
+.calendar-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 10px;
+	gap: 5px;
+}
+
+.calendar-nav {
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	border: 1px solid var(--border);
+	background: var(--bg-secondary);
+	color: var(--text-primary);
+	cursor: pointer;
+	font-size: 0.7rem;
+	transition: 0.2s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.calendar-nav:hover {
+	background: var(--accent);
+	border-color: var(--accent);
+	color: white;
+}
+
+.calendar-month-year {
+	font-size: 0.9rem;
+	font-weight: 700;
+	text-align: center;
+	flex: 1;
+	min-width: 100px;
+}
+
+.calendar-today-btn {
+	padding: 4px 10px;
+	border-radius: 14px;
+	border: 1px solid var(--accent);
+	background: transparent;
+	color: var(--accent-light);
+	cursor: pointer;
+	font-size: 0.7rem;
+	font-weight: 600;
+	transition: 0.2s;
+	white-space: nowrap;
+}
+.calendar-today-btn:hover {
+	background: var(--accent);
+	color: white;
+}
+
+/* Дни недели */
+.calendar-weekdays {
+	display: grid !important;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 3px;
+	margin-bottom: 3px;
+}
+.calendar-weekdays span {
+	text-align: center;
+	font-size: 0.6rem;
+	font-weight: 600;
+	color: var(--text-secondary);
+	padding: 2px 0;
+}
+
+/* Сетка дней */
+.calendar-grid {
+	display: grid !important;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 3px;
+}
+
+.calendar-day {
+	aspect-ratio: 1;
+	display: flex !important;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 2px;
+	font-size: 0.75rem;
+	font-weight: 500;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.15s ease;
+	border: 2px solid transparent;
+	color: var(--text-primary);
+	user-select: none;
+	padding: 2px;
+	line-height: 1;
+	min-width: 0;
+}
+
+.calendar-day .day-number {
+	font-size: 0.8rem;
+	font-weight: 600;
+	line-height: 1;
+}
+
+.calendar-day .day-icon {
+	font-size: 0.55rem;
+	line-height: 1;
+}
+
+.calendar-day:hover {
+	background: var(--hover-bg);
+	border-color: var(--border);
+}
+.calendar-day.empty {
+	cursor: default;
+	pointer-events: none;
+}
+.calendar-day.today {
+	border-color: var(--accent) !important;
+	font-weight: 700;
+	box-shadow: 0 0 0 2px var(--accent-glow);
+}
+.calendar-day.selected {
+	border-color: var(--text-primary) !important;
+	background: var(--hover-bg);
+	font-weight: 700;
+}
+
+/* Типы дней */
+.calendar-day.work {
+	background: rgba(59, 130, 246, 0.2);
+	border-color: rgba(59, 130, 246, 0.4);
+	color: #3b82f6;
+}
+.calendar-day.study {
+	background: rgba(139, 92, 246, 0.2);
+	border-color: rgba(139, 92, 246, 0.4);
+	color: #8b5cf6;
+}
+.calendar-day.exam {
+	background: rgba(239, 68, 68, 0.2);
+	border-color: rgba(239, 68, 68, 0.5);
+	color: #ef4444;
+	animation: examBgPulse 2s infinite;
+}
+.calendar-day.session {
+	background: rgba(245, 158, 11, 0.2);
+	border-color: rgba(245, 158, 11, 0.4);
+	color: #f59e0b;
+}
+.calendar-day.diploma {
+	background: rgba(16, 185, 129, 0.2);
+	border-color: rgba(16, 185, 129, 0.5);
+	color: #10b981;
+	animation: diplomaGlow 2s infinite;
+}
+.calendar-day.dayoff {
+	background: rgba(107, 114, 128, 0.15);
+	border-color: rgba(107, 114, 128, 0.3);
+	color: #9ca3af;
+}
+
+@keyframes examBgPulse {
+	0%,
+	100% {
+		box-shadow: inset 0 0 0 0 rgba(239, 68, 68, 0);
+	}
+	50% {
+		box-shadow: inset 0 0 6px 2px rgba(239, 68, 68, 0.15);
+	}
+}
+@keyframes diplomaGlow {
+	0%,
+	100% {
+		box-shadow: 0 0 3px rgba(16, 185, 129, 0.3);
+	}
+	50% {
+		box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+	}
+}
+
+/* Легенда */
+.calendar-legend {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+	margin-top: 8px;
+	padding-top: 8px;
+	border-top: 1px solid var(--border);
+}
+.legend-item {
+	display: flex;
+	align-items: center;
+	gap: 3px;
+	font-size: 0.6rem;
+	color: var(--text-secondary);
+	font-weight: 500;
+	padding: 2px 6px;
+	border-radius: 10px;
+	background: var(--bg-secondary);
+	border: 1px solid var(--border);
+}
+.legend-icon {
+	font-size: 0.7rem;
+}
+.legend-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 2px;
+}
+.legend-dot.work {
+	background: #3b82f6;
+}
+.legend-dot.study {
+	background: #8b5cf6;
+}
+.legend-dot.exam {
+	background: #ef4444;
+}
+.legend-dot.session {
+	background: #f59e0b;
+}
+.legend-dot.diploma {
+	background: #10b981;
+}
+.legend-dot.dayoff {
+	background: #6b7280;
+}
+.legend-dot.tasks {
+	background: #ec4899;
+}
+
+/* Сайдбар */
+.calendar-sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.calendar-sidebar .card {
+	padding: 10px 12px !important;
+}
+
+.stats-title {
+	font-size: 0.75rem;
+	font-weight: 600;
+	margin-bottom: 6px;
+	color: var(--text-primary);
+}
+.stats-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 3px;
+}
+.stat-item {
+	text-align: center;
+	padding: 5px 2px;
+	background: var(--bg-secondary);
+	border-radius: 5px;
+	border: 1px solid var(--border);
+	transition: 0.2s;
+}
+.stat-item:hover {
+	border-color: var(--accent);
+}
+.stat-icon {
+	font-size: 0.8rem;
+	display: block;
+	margin-bottom: 1px;
+}
+.stat-value {
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: var(--accent-light);
+	display: block;
+}
+.stat-label {
+	font-size: 0.5rem;
+	color: var(--text-secondary);
+	text-transform: uppercase;
+}
+.info-placeholder {
+	color: var(--text-secondary);
+	font-size: 0.7rem;
+	text-align: center;
+	padding: 6px 0;
+}
+
+/* Выбранный день */
+.selected-day-details {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.selected-day-date {
+	font-size: 0.85rem;
+	font-weight: 600;
+	text-align: center;
+	padding: 8px;
+	background: var(--bg-secondary);
+	border-radius: 6px;
+	color: var(--text-primary);
+}
+
+.selected-day-type-display {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 10px;
+	background: var(--bg-secondary);
+	border-radius: 6px;
+	font-weight: 500;
+	font-size: 0.8rem;
+}
+
+/* Селект типа дня */
+.type-selector {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-top: 4px;
+}
+
+.type-selector label {
+	font-size: 0.7rem;
+	color: var(--text-secondary);
+	font-weight: 500;
+}
+
+.type-selector select {
+	width: 100%;
+	padding: 8px 10px;
+	border-radius: 6px;
+	border: 1px solid var(--border);
+	background: var(--bg-secondary);
+	color: var(--text-primary);
+	font-size: 0.8rem;
+	cursor: pointer;
+	font-family: inherit;
+	outline: none;
+	transition: 0.2s;
+	appearance: auto;
+}
+
+.type-selector select:focus {
+	border-color: var(--accent);
+	box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.type-selector select option {
+	background: var(--bg-card);
+	color: var(--text-primary);
+	padding: 8px;
+}
+
+/* Ссылка на задачи */
+.tasks-link {
+	margin-top: 5px;
+	font-size: 0.75rem;
+	cursor: pointer;
+	padding: 6px 10px;
+	background: var(--bg-secondary);
+	border-radius: 6px;
+	border: 1px solid var(--border);
+	transition: 0.2s;
+	color: var(--text-primary);
+}
+
+.tasks-link:hover {
+	border-color: var(--accent);
+	background: var(--accent);
+	color: white;
+}
+
+/* Быстрые действия */
+.quick-actions {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 3px;
+}
+.quick-action-btn {
+	padding: 5px 6px;
+	border-radius: 5px;
+	border: 1px solid var(--border);
+	background: var(--bg-secondary);
+	color: var(--text-primary);
+	cursor: pointer;
+	font-size: 0.65rem;
+	font-weight: 500;
+	transition: 0.2s;
+	font-family: inherit;
+}
+.quick-action-btn:hover {
+	border-color: var(--accent);
+	background: var(--accent);
+	color: white;
+}
+.quick-action-btn.clear-btn {
+	grid-column: 1/-1;
+	background: transparent;
+	color: var(--danger);
+	border-color: var(--danger);
+}
+.quick-action-btn.clear-btn:hover {
+	background: var(--danger);
+	color: white;
+}
+
+@media (max-width: 900px) {
+	.calendar-layout {
+		grid-template-columns: 1fr !important;
+	}
+}
+@media (max-width: 600px) {
+	.calendar-panel {
+		padding: 6px;
+	}
+	.calendar-day {
+		font-size: 0.65rem;
+		border-radius: 3px;
+		gap: 1px;
+	}
+	.calendar-day .day-number {
+		font-size: 0.7rem;
+	}
+	.calendar-day .day-icon {
+		font-size: 0.45rem;
+	}
+	.calendar-weekdays span {
+		font-size: 0.5rem;
+	}
+}

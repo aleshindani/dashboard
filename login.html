@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+	<head>
+		<link rel="manifest" href="manifest.json" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta
+			name="apple-mobile-web-app-status-bar-style"
+			content="black-translucent"
+		/>
+		<meta name="apple-mobile-web-app-title" content="MyDash" />
+		<link rel="apple-touch-icon" href="favicon.png" />
+		<link rel="icon" type="image/png" href="favicon.png" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Вход в дашборд</title>
+		<style>
+			:root {
+				--bg: #0a0a0f;
+				--card: #14151a;
+				--text: #e4e6eb;
+				--text2: #6b7280;
+				--accent: #6c63ff;
+				--border: #1e1f26;
+			}
+
+			[data-theme='light'] {
+				--bg: #f5f6fa;
+				--card: #ffffff;
+				--text: #1a1d27;
+				--text2: #9ca3af;
+				--border: #e5e7eb;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family:
+					'Segoe UI',
+					system-ui,
+					-apple-system,
+					sans-serif;
+				background: var(--bg);
+				color: var(--text);
+				min-height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 20px;
+				transition: background 0.4s;
+			}
+
+			.login-wrapper {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				max-width: 850px;
+				width: 100%;
+				background: var(--card);
+				border-radius: 24px;
+				overflow: hidden;
+				border: 1px solid var(--border);
+				box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+				animation: fadeIn 0.5s ease;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			/* Левая панель */
+			.login-brand {
+				background: linear-gradient(135deg, #1a1040, #0d0d2b);
+				padding: 48px 36px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.login-brand::before {
+				content: '';
+				position: absolute;
+				width: 300px;
+				height: 300px;
+				background: radial-gradient(
+					circle,
+					rgba(108, 99, 255, 0.15),
+					transparent
+				);
+				top: -50px;
+				right: -50px;
+				border-radius: 50%;
+			}
+
+			.brand-icon {
+				width: 64px;
+				height: 64px;
+				background: linear-gradient(135deg, #6c63ff, #8b85ff);
+				border-radius: 18px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 28px;
+				margin-bottom: 16px;
+				position: relative;
+				z-index: 1;
+				box-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
+			}
+
+			.brand-title {
+				font-size: 1.3rem;
+				font-weight: 700;
+				color: white;
+				position: relative;
+				z-index: 1;
+			}
+			.brand-subtitle {
+				font-size: 0.75rem;
+				color: rgba(255, 255, 255, 0.5);
+				margin-top: 4px;
+				position: relative;
+				z-index: 1;
+			}
+			.brand-clock {
+				margin-top: 20px;
+				position: relative;
+				z-index: 1;
+			}
+			.brand-time {
+				font-size: 1.4rem;
+				font-weight: 700;
+				color: white;
+				font-family: 'SF Mono', monospace;
+			}
+			.brand-date {
+				font-size: 0.65rem;
+				color: rgba(255, 255, 255, 0.5);
+			}
+
+			/* Правая панель */
+			.login-form {
+				padding: 36px 32px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.form-switcher {
+				position: relative;
+				min-height: 420px;
+			}
+
+			.form-panel {
+				position: absolute;
+				width: 100%;
+				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+
+			.form-panel.login-panel {
+				opacity: 1;
+				transform: translateX(0);
+				pointer-events: all;
+			}
+
+			.form-panel.login-panel.hidden {
+				opacity: 0;
+				transform: translateX(-40px);
+				pointer-events: none;
+			}
+
+			.form-panel.register-panel {
+				opacity: 0;
+				transform: translateX(40px);
+				pointer-events: none;
+			}
+
+			.form-panel.register-panel.visible {
+				opacity: 1;
+				transform: translateX(0);
+				pointer-events: all;
+			}
+
+			.form-welcome {
+				font-size: 1.15rem;
+				font-weight: 700;
+				margin-bottom: 2px;
+			}
+			.form-hint {
+				font-size: 0.75rem;
+				color: var(--text2);
+				margin-bottom: 16px;
+			}
+
+			.form-group {
+				margin-bottom: 10px;
+			}
+
+			.form-label {
+				display: block;
+				font-size: 0.7rem;
+				color: var(--text2);
+				margin-bottom: 3px;
+				font-weight: 500;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+			}
+
+			.form-input {
+				width: 100%;
+				padding: 10px 12px;
+				border-radius: 8px;
+				border: 1.5px solid var(--border);
+				background: var(--bg);
+				color: var(--text);
+				font-size: 0.85rem;
+				font-family: inherit;
+				transition: 0.2s;
+				outline: none;
+			}
+
+			.form-input:focus {
+				border-color: #6c63ff;
+				box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+			}
+
+			.form-input::placeholder {
+				color: #6b7280;
+			}
+
+			.btn {
+				width: 100%;
+				padding: 11px;
+				border-radius: 8px;
+				border: none;
+				font-size: 0.85rem;
+				font-weight: 600;
+				cursor: pointer;
+				font-family: inherit;
+				transition: 0.2s;
+			}
+
+			.btn-primary {
+				background: #6c63ff;
+				color: white;
+				margin-top: 2px;
+			}
+
+			.btn-primary:hover {
+				background: #5b52e0;
+				transform: translateY(-1px);
+				box-shadow: 0 6px 20px rgba(108, 99, 255, 0.3);
+			}
+
+			.btn-ghost {
+				background: transparent;
+				border: 1.5px solid var(--border);
+				color: var(--text2);
+				margin-top: 6px;
+				font-weight: 500;
+			}
+
+			.btn-ghost:hover {
+				border-color: #6c63ff;
+				color: #6c63ff;
+			}
+
+			.btn-back {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 6px;
+				background: transparent;
+				border: 1.5px solid var(--border);
+				color: var(--text);
+				font-weight: 600;
+				font-size: 0.85rem;
+				margin-top: 6px;
+			}
+
+			.btn-back:hover {
+				border-color: #6c63ff;
+				color: #6c63ff;
+				background: rgba(108, 99, 255, 0.05);
+			}
+
+			.error {
+				color: #ef4444;
+				font-size: 0.72rem;
+				text-align: center;
+				margin-top: 6px;
+				display: none;
+				animation: shake 0.4s ease;
+			}
+			.error.show {
+				display: block;
+			}
+
+			@keyframes shake {
+				0%,
+				100% {
+					transform: translateX(0);
+				}
+				25% {
+					transform: translateX(-4px);
+				}
+				75% {
+					transform: translateX(4px);
+				}
+			}
+
+			.success-msg {
+				color: #4ade80;
+				font-size: 0.75rem;
+				text-align: center;
+				margin-top: 6px;
+				display: none;
+			}
+			.success-msg.show {
+				display: block;
+			}
+
+			.theme-switch {
+				text-align: center;
+				margin-top: 12px;
+			}
+			.theme-btn {
+				font-size: 0.7rem;
+				color: var(--text2);
+				cursor: pointer;
+				background: none;
+				border: none;
+				font-family: inherit;
+			}
+			.theme-btn:hover {
+				color: #6c63ff;
+			}
+
+			@media (max-width: 700px) {
+				.login-wrapper {
+					grid-template-columns: 1fr;
+				}
+				.login-brand {
+					padding: 28px 20px;
+				}
+				.login-form {
+					padding: 24px 20px;
+				}
+				.form-switcher {
+					min-height: 380px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="login-wrapper">
+			<div class="login-brand">
+				<div class="brand-icon">⚡</div>
+				<div class="brand-title">MyDash</div>
+				<div class="brand-subtitle">Ваш персональный дашборд</div>
+				<div class="brand-clock">
+					<div class="brand-time" id="clockTime">00:00</div>
+					<div class="brand-date" id="clockDate">--</div>
+				</div>
+			</div>
+
+			<div class="login-form">
+				<div class="form-switcher">
+					<!-- Вход -->
+					<div class="form-panel login-panel" id="loginPanel">
+						<div class="form-welcome">👋 С возвращением</div>
+						<div class="form-hint" id="lastLoginHint">Войдите в аккаунт</div>
+						<div class="form-group">
+							<label class="form-label">Логин</label
+							><input
+								type="text"
+								class="form-input"
+								id="lu"
+								placeholder="Ваш логин"
+								autocomplete="username"
+							/>
+						</div>
+						<div class="form-group">
+							<label class="form-label">Пароль</label
+							><input
+								type="password"
+								class="form-input"
+								id="lp"
+								placeholder="Ваш пароль"
+								autocomplete="current-password"
+							/>
+						</div>
+						<button class="btn btn-primary" onclick="doLogin()">Войти</button>
+						<button class="btn btn-ghost" onclick="showRegister()">
+							📝 Создать аккаунт
+						</button>
+						<div class="error" id="err"></div>
+					</div>
+
+					<!-- Регистрация -->
+					<div class="form-panel register-panel" id="registerPanel">
+						<div class="form-welcome">📝 Регистрация</div>
+						<div class="form-hint">Создайте новый аккаунт</div>
+						<div class="form-group">
+							<label class="form-label">Логин</label
+							><input
+								type="text"
+								class="form-input"
+								id="ru"
+								placeholder="Придумайте логин"
+							/>
+						</div>
+						<div class="form-group">
+							<label class="form-label">Пароль</label
+							><input
+								type="password"
+								class="form-input"
+								id="rp"
+								placeholder="Придумайте пароль"
+							/>
+						</div>
+						<div class="form-group">
+							<label class="form-label">Имя</label
+							><input
+								type="text"
+								class="form-input"
+								id="rn"
+								placeholder="Ваше имя"
+							/>
+						</div>
+						<div class="form-group">
+							<label class="form-label">Код админа</label
+							><input
+								type="text"
+								class="form-input"
+								id="rc"
+								placeholder="admin2024"
+							/>
+						</div>
+						<button class="btn btn-primary" onclick="doRegister()">
+							Зарегистрироваться
+						</button>
+						<button class="btn btn-ghost btn-back" onclick="showLogin()">
+							← Назад ко входу
+						</button>
+						<div class="error" id="err2"></div>
+						<div class="success-msg" id="success2"></div>
+					</div>
+				</div>
+
+				<div class="theme-switch">
+					<button class="theme-btn" onclick="toggleTheme()">
+						🌓 Сменить тему
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			function updateClock() {
+				const now = new Date()
+				document.getElementById('clockTime').textContent =
+					now.toLocaleTimeString('ru-RU', {
+						hour: '2-digit',
+						minute: '2-digit',
+					})
+				const months = [
+					'января',
+					'февраля',
+					'марта',
+					'апреля',
+					'мая',
+					'июня',
+					'июля',
+					'августа',
+					'сентября',
+					'октября',
+					'ноября',
+					'декабря',
+				]
+				document.getElementById('clockDate').textContent = `${now.getDate()} ${
+					months[now.getMonth()]
+				} ${now.getFullYear()}`
+			}
+			updateClock()
+			setInterval(updateClock, 30000)
+
+			const lastLogin = localStorage.getItem('last-login-time')
+			if (lastLogin) {
+				const d = new Date(lastLogin)
+				document.getElementById('lastLoginHint').textContent =
+					`Последний вход: ${d.toLocaleDateString('ru-RU', {
+						day: 'numeric',
+						month: 'long',
+					})} в ${d.toLocaleTimeString('ru-RU', {
+						hour: '2-digit',
+						minute: '2-digit',
+					})}`
+			}
+
+			function toggleTheme() {
+				const html = document.documentElement
+				const c = html.getAttribute('data-theme')
+				html.setAttribute('data-theme', c === 'dark' ? 'light' : 'dark')
+				localStorage.setItem('login-theme', html.getAttribute('data-theme'))
+			}
+			const st = localStorage.getItem('login-theme')
+			if (st) document.documentElement.setAttribute('data-theme', st)
+
+			function showRegister() {
+				document.getElementById('loginPanel').classList.add('hidden')
+				document.getElementById('registerPanel').classList.add('visible')
+				document.getElementById('err').classList.remove('show')
+				document.getElementById('err2').classList.remove('show')
+				document.getElementById('success2').classList.remove('show')
+				setTimeout(() => document.getElementById('ru').focus(), 400)
+			}
+
+			function showLogin() {
+				document.getElementById('registerPanel').classList.remove('visible')
+				document.getElementById('loginPanel').classList.remove('hidden')
+				document.getElementById('err2').classList.remove('show')
+				document.getElementById('success2').classList.remove('show')
+				document.getElementById('rp').value = ''
+				document.getElementById('rn').value = ''
+				document.getElementById('rc').value = ''
+				setTimeout(() => document.getElementById('lu').focus(), 400)
+			}
+
+			const KEY = 'dashboard-users'
+			const ADMIN = 'admin2024'
+
+			function getUsers() {
+				let d = localStorage.getItem(KEY)
+				if (d) return JSON.parse(d)
+				const def = [
+					{
+						username: 'admin',
+						password: 'admin123',
+						name: 'Админ',
+						role: 'admin',
+					},
+					{
+						username: 'user',
+						password: 'user123',
+						name: 'Пользователь',
+						role: 'user',
+					},
+				]
+				localStorage.setItem(KEY, JSON.stringify(def))
+				return def
+			}
+			function saveUsers(u) {
+				localStorage.setItem(KEY, JSON.stringify(u))
+			}
+
+			function doLogin() {
+				const u = document.getElementById('lu').value.trim()
+				const p = document.getElementById('lp').value.trim()
+				const e = document.getElementById('err')
+				e.classList.remove('show')
+				if (!u || !p) {
+					e.textContent = 'Заполните все поля'
+					e.classList.add('show')
+					return
+				}
+				const users = getUsers()
+				const user = users.find(x => x.username === u && x.password === p)
+				if (user) {
+					localStorage.setItem('last-login-time', new Date().toISOString())
+					localStorage.setItem(
+						'dashboard-session',
+						JSON.stringify({
+							username: user.username,
+							name: user.name,
+							role: user.role,
+							loginTime: new Date().toISOString(),
+						}),
+					)
+					window.location.href = 'index.html'
+				} else {
+					e.textContent = 'Неверный логин или пароль'
+					e.classList.add('show')
+				}
+			}
+
+			function doRegister() {
+				const u = document.getElementById('ru').value.trim()
+				const p = document.getElementById('rp').value.trim()
+				const n = document.getElementById('rn').value.trim()
+				const c = document.getElementById('rc').value.trim()
+				const e = document.getElementById('err2')
+				const s = document.getElementById('success2')
+				e.classList.remove('show')
+				s.classList.remove('show')
+				if (!u || !p || !n) {
+					e.textContent = 'Заполните все поля'
+					e.classList.add('show')
+					return
+				}
+				if (p.length < 3) {
+					e.textContent = 'Пароль минимум 3 символа'
+					e.classList.add('show')
+					return
+				}
+				const users = getUsers()
+				if (users.find(x => x.username === u)) {
+					e.textContent = 'Пользователь уже существует'
+					e.classList.add('show')
+					return
+				}
+				users.push({
+					username: u,
+					password: p,
+					name: n,
+					role: c === ADMIN ? 'admin' : 'user',
+				})
+				saveUsers(users)
+				s.textContent = '✅ Аккаунт создан! Сейчас войдите.'
+				s.classList.add('show')
+				document.getElementById('lu').value = u
+				document.getElementById('lp').value = ''
+				setTimeout(() => showLogin(), 1500)
+			}
+
+			document.getElementById('lp').addEventListener('keydown', e => {
+				if (e.key === 'Enter') doLogin()
+			})
+			document.getElementById('rc').addEventListener('keydown', e => {
+				if (e.key === 'Enter') doRegister()
+			})
+		</script>
+		<script>
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('sw.js')
+			}
+		</script>
+	</body>
+</html>
